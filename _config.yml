@@ -8,11 +8,7 @@ baseurl: ""
 url: "http://romcybersec.com"
 twitter_username: r0msec
 github_username:  romsec
-facebook_username:  StartBootstrap
-email_username:  your-email@yourdomain.com
-
-# Google Analytics
-# To enable google analytics, uncomment below line with a valid Google Tracking ID
+email_username:  romsec@protonmail.com
 # google_tracking_id:
 
 # Build settings
