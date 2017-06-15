@@ -3,7 +3,7 @@ layout:     post
 title:      "My First"
 date:       2017-06-08 16:20:00
 author:     "RomSec"
-header-img: "img/post-bg-02.jpg"
+header-img: "img/Awaiting/first-header.jpg"
 ---
 
 My first website dates back to 2007, [before Chrome was released!](http://www.evolutionoftheweb.com/) At that time, I was activtely moderating online sports forums and was eager to create my own website. The only idea that sparked in my head for content was to advertise the novels that my brother was actively writing. So I went ahead, learned the basics of HTML, signed up with a webhost and began populating the site with various content (*unlike the plug-and-play templates today, this site was written from scratch*). The website wasn't overly complex, just some static content and a few different pages, but it led me to furthering my interest in web based technology.
