@@ -1,13 +1,13 @@
 # Site settings
-title: Clean Blog
+title: RomSec
 header-img: img/home-bg.jpg
-email: your-email@yourdomain.com
-copyright_name: Your/Project/Corporate Name
-description: "Write your site description here. It will be used as your sites meta description as well!"
-baseurl: "/startbootstrap-clean-blog-jekyll"
-url: "http://yourdomain.com"
-twitter_username: SBootstrap
-github_username:  davidtmiller
+email: romsec@protonmail.com
+copyright_name: RomSec
+description: "Here"
+baseurl: ""
+url: "http://romcybersec.com"
+twitter_username: r0msec
+github_username:  romsec
 facebook_username:  StartBootstrap
 email_username:  your-email@yourdomain.com
 
