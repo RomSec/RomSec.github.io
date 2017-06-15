@@ -8,7 +8,7 @@ header-img: "img/SANSChallenge/shark.jpg"
 ---
 
 Well, this isn't actually my first ever write-up, however the first technical write-up that has been published on this website! After taking a network security class last semester, I've been increasingly interested in learning more about the tools/products used. To test the skills I currently posess, I discovered the [SANS Network Challenge](https://www.surveymonkey.com/r/BZMXTKM). While the challenge is long over, the website still has the pcap/txt files as well as submissions for the questions, so I figured I'd give it a try!
-
+<hr>
 <h1>Question 1</h1>
 
 <b>SWT-syslog_messages.txt</b> <br>
@@ -31,7 +31,7 @@ Now that I have verified the portscanning activity, the first instance is <b>Aug
 {% highlight bash %} Aug 29 07:07:40 gw kernel: rtc_cmos rtc_cmos: setting system clock to 2013-08-29 11:07:08 UTC (1377774428) {% endhighlight %}
 
 <h3>Answer</h3> 13:58:55 on August 29th 2013 UTC
-
+<hr>
 <h1>Question 2</h1>
 
 <b>nitroba.pcap</b> <br>
@@ -48,7 +48,7 @@ This filter gave me all the packets with the associated MAC address! Since some 
 <li>169.254.90.183</li>
 <li>192.168.1.64</li>
 
-
+<hr>
 <h1>Question 3</h1>
 
 <b>ftp-example.pcap</b> <br>
@@ -73,7 +73,7 @@ While looking at the image below, I can gather the IP addresses and TCP ports us
 <h3>Answer</h3> 
 <li>193.168.75.29:37028</li>
 <li>149.20.20.135:21</li>
-
+<hr>
 <h1>Question 4</h1>
 
 <b>nfcapd.201405230000.txt</b> <br>
@@ -93,7 +93,7 @@ The command above spit out a list of 55 log entries, which is much easier to dea
  
  <h3>Answer</h3> 
  49
- 
+ <hr>
 <h1>Question 5</h1>
 
 <b>stark-20120403-full-smb_smb2.pcap</b> <br>
@@ -108,7 +108,7 @@ Similar to questions one and three, I've been tasked to find information about a
 13625 bytes
 
 *<i>Another way to figure out the byte size of the file in WireShark is to go to File > Export Objects > SMB, then locate the proper XLSX file and determine the byte-size via your file explorer</i>
-
+<hr>
 <h1>Question 6</h1>
 
 <b>snort.log.1340504390.pcap</b> <br>
@@ -135,7 +135,7 @@ For now, we're concerned with the second set of bolded HEX characters, which app
 
 <h3>Answer</h3> 
 55:4c:51:45:4e:50:32 at offset 0x46
-
+<hr>
 <h1> Conclusion </h1>
 
 If you've read up to this point, I appreciate it! Big shout out to SANS DFIR for posting this challenge, and keeping it online over two years after the initial deadline. As I sign off on this write-up, it's clear that practicing my technical and writing skills is beneficial to my growth as a professional. I hope to continue publishing these write-ups for my own good and for anyone that finds them helpful.
