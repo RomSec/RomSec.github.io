@@ -1,0 +1,13 @@
+---
+layout:     post
+title:      "My First"
+date:       2017-06-08 16:20:00
+author:     "RomSec"
+header-img: "img/post-bg-02.jpg"
+---
+
+My first website dates back to 2007, [before Chrome was released!](http://www.evolutionoftheweb.com/) At that time, I was activtely moderating online sports forums and was eager to create my own website. The only idea that sparked in my head for content was to advertise the novels that my brother was actively writing. So I went ahead, learned the basics of HTML, signed up with a webhost and began populating the site with various content (*unlike the plug-and-play templates today, this site was written from scratch*). The website wasn't overly complex, just some static content and a few different pages, but it led me to furthering my interest in web based technology.
+
+Fast forward ten years, and I'm not much more of a web developer than I was before. I'm a bit smarter now, more educated with web application technologies, and wanting to spend too much time developing an intricate personal web site to document my learnings, share my opinions, and help others. Over the past decade I’ve reaped the benefits of the internet, but haven’t fulfilled my part in giving back To accomplish this, I started out RomSec with a WordPress website in late 2016. The various plug-ins were great, the website looked professionally made, but I found the plug-and-play development to be too dull for my liking. Once I scrapped that idea, I moved over to the Django framework and attempted to start my website from scratch. If you want to know how that went, reference back to the first sentence of this paragraph. That headache led to the current website you see today!
+
+As for my ambitions with this website, I have some write-ups in mind that I plan on typing up over the course of the next few weeks. You’ll see a fair share of blog posts that have probably been covered a jillion times over on other sites, as well as some that breathe light into our web space. The first version of RomSec will remain minimalistic and content will be the priority. Once there is a need for an archive, a complex and somewhat elegant version two may arise! Until then, enjoy the content and feel free to reach out to me. 
