@@ -56,7 +56,7 @@ This filter gave me all the packets with the associated MAC address! Since some 
 
 The easiest way for me to locate the requested file in WireShark is to use 'CTRL + F', which opens up the 'Find a Packet' window. 
 
-![Figure One](/images/SANSChallenge/ThreeOne.PNG)
+![Figure One](/img/SANSChallenge/ThreeOne.PNG)
 
 As you can see in the image above, I searched for a string and included a portion of the file that I was looking for. The powerful string search led me to the exact packet I was looking for! The image below has several key points that led me to the answer:
 
@@ -68,7 +68,7 @@ As you can see in the image above, I searched for a string and included a portio
 While looking at the image below, I can gather the IP addresses and TCP ports used in this file transfer
 
 <!--![_config.yml]({{ site.baseurl }}/images/SANSChallenge/ThreeTwo.PNG) -->
-![Figure Two](/images/SANSChallenge/ThreeTwo.PNG)
+![Figure Two](/img/SANSChallenge/ThreeTwo.PNG)
 
 <h3>Answer</h3> 
 <li>193.168.75.29:37028</li>
@@ -84,7 +84,7 @@ Another text file to parse through.. luckily I have some experience with the ter
 {% highlight bash %} grep "63.141.241.10:22 " nfcapd.201405230000.txt {% endhighlight %}
 *<i>Notice the space after the 22? This challenge throws a curveball at you by listing thousands of ports with 2202, therefor the space is needed to omit the unncessary ports</i>
 
-![Figure Three](/images/SANSChallenge/FourOne.PNG)
+![Figure Three](/img/SANSChallenge/FourOne.PNG)
 
 The command above spit out a list of 55 log entries, which is much easier to deal with. However, I spotted several repeat IPs and was puzzled as to why the uniq command wasn't working. It clicked when I realized that the uniq command reads line by line, so even if the IPs were the same, the date on the same line was different. After some Google searching, I realized that only printing out the fifth column of the log would enable me to use the uniq command. To do this, I attached "awk '{ print $5; }' to the end, which gave me a neat list of all the source IPs and their ports. To automate counting the results, I used 'wc -l'. The final command and answer are listed below.
 
@@ -101,7 +101,7 @@ The command above spit out a list of 55 log entries, which is much easier to dea
 
 Similar to questions one and three, I've been tasked to find information about a file. Using my handy string search tool, I have searched for the file name inside the packet capture and located it! In order for me to find the file size, I scroll past the request and to the end of the file transfer where the Write ANDX Request lives. After digging through the packet, I located the variable with the transferred file size!
 
-![Figure Four](/images/SANSChallenge/FiveOne.PNG)
+![Figure Four](/img/SANSChallenge/FiveOne.PNG)
 
 <h3>Answer</h3> 
 
@@ -119,11 +119,11 @@ The final question is yet another packet capture, however this one is particular
 
 After clicking around through numerous packets, I decided to take three packets from three different hosts and examine them closely. Inside each of the packets, the data field is surprisingly similar
 
-![Figure Five](/images/SANSChallenge/SixOne.PNG)
+![Figure Five](/img/SANSChallenge/SixOne.PNG)
 
-![Figure Six](/images/SANSChallenge/SixTwo.PNG)
+![Figure Six](/img/SANSChallenge/SixTwo.PNG)
 
-![Figure Seven](/images/SANSChallenge/SixThree.PNG)
+![Figure Seven](/img/SANSChallenge/SixThree.PNG)
 
 I decided to take the data and place it into a text editor for easy viewing. After comparing the three file captures above, the bolded text below represents the constants in each file:
 
