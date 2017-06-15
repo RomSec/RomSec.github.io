@@ -1,10 +1,10 @@
 ---
 layout:     post
-title:      "SANS Network Forensics Challenge"
-subtitle:   "The first write-up"
+title:      "SANS Challenge"
+subtitle:   "Network Forensics Write-Up"
 date:       2017-06-14 16:20:00
 author:     "RomSec"
-header-img: "img/post-bg-01.jpg"
+header-img: "img/SANSChallenge/shark.jpg"
 ---
 
 Well, this isn't actually my first ever write-up, however the first technical write-up that has been published on this website! After taking a network security class last semester, I've been increasingly interested in learning more about the tools/products used. To test the skills I currently posess, I discovered the [SANS Network Challenge](https://www.surveymonkey.com/r/BZMXTKM). While the challenge is long over, the website still has the pcap/txt files as well as submissions for the questions, so I figured I'd give it a try!
