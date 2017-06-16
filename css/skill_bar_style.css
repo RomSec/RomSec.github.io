@@ -1,0 +1,91 @@
+body
+{
+ text-align:center;
+ width:995px;
+ margin:0 auto;
+ padding:0px;
+ font-family: "Myriad Pro","Helvetica Neue",Helvetica,Arial,Sans-Serif;
+ background-color:#CED8F6;
+}
+#wrapper
+{
+ margin:0 auto;
+ padding:0px;
+ text-align:center;
+ width:995px;
+}
+#wrapper h1
+{
+ margin-top:100px;
+ font-size:55px;
+ color:#2E64FE;
+}
+#wrapper h1 a
+{
+ color:#2E64FE;
+ font-size:18px;
+}
+.skill_name 
+{
+ margin-left:250px;
+ width:50px;
+ height:40px;
+ line-height:40px;
+ font-weight:bold;
+ font-size:13px;
+ color:white;
+ clear:both;
+ float:left;
+ border-radius:3px 0px 0px 3px;
+}
+#skill_php
+{
+ background-color:#088A85;
+}
+#skill_asp
+{
+ background-color:#5858FA;
+}
+#skill_jsp
+{
+ background-color:#04B404;
+}
+.skillbar_wrapper 
+{
+ float:left;
+ position:relative;
+ display:block;
+ margin-bottom:15px;
+ width:400px;
+ background-color:#E6E6E6;
+ height:40px;
+ border-radius:0px 3px 3px 0px;
+}
+.skillbar_bar 
+{
+ height:40px;
+ width:0px;
+ border-radius:0px 3px 3px 0px;
+}
+#skillbar_php
+{
+ background-color:#01DFD7;
+}
+#skillbar_asp
+{
+ background-color:#8181F7;
+}
+#skillbar_jsp
+{
+ background-color:#01DF01;
+}
+.skill_bar_percent 
+{
+ position:absolute;
+ right:10px;
+ top:0;
+ font-size:12px;
+ height:35px;
+ line-height:35px;
+ color:black;
+}
