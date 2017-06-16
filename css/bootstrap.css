@@ -9,6 +9,10 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+.progress-bar {
+  background-color: green;
+}
 body {
   margin: 0;
 }
