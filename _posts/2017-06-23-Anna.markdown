@@ -1,0 +1,153 @@
+---
+layout:     post
+title:      "Anna's Aurora"
+subtitle:   "APT Challenge"
+date:       2017-06-22 16:20:00
+author:     "Chris"
+header-img: "img/Anna/shark.jpg"
+---
+
+Today we'll go over Ann'a Aurora, a pcap based forensic challenge hosted by the SANS Institute. The background for the incident is that a threat actor (Anna) is after a company secret, and she's been watching a lead developer (Vick) to find a way into the systems. One night, she notices that Vick initiates a secure connection with the company's headquarters and phishes Vick with a browser based zero-day. Unfortunately for the company, Vick clicks on the link and Anna now has access to the network. We've been assigned the role of analyzing captured traffic and build a timeline of events. 
+
+To start off, I want to get a clear picture of the IP addresses that I'll be dealing with. As seen in the figure below, 10.10.10.10 & 10.10.10.70 are the two main IP addresses that are communicating. We don't have to worry about 10.10.10.255 because it is a broadcast address for the network.
+
+![Figure One](/img/Anna/fig1.PNG)
+
+Now that we have an idea of the machines involved, we can start manually investigating the pcap file. Right off the bat, the first dozen or so packets have some interesting information for us to pick apart. The figure below depicts this traffic, which I suspect to be the Anna's spear-phishing attempt. For now, we'll review the contents of these first few packets but not answer any questions (scroll down for answers).
+
+![Figure Two](/img/Anna/fig2.PNG)
+
+Since we're in the information collecting phase, let's list out the relevant facts:
+
+<li>1) HTTP GET request from client(1035) to the web server(8080)</li> 
+<li>2-6) Acknowledge, sends data, acknowledge </li> 
+<li>7) Successful HTTP request, as well as the page text</li> 
+<li>8) Client requests .gif resource on page</li>
+<li>9-12) Web server sends .gif, acknowledgments, TCP stream ends</li>
+
+This TCP stream contains the only HTTP traffic in the packet capture, so the elements in the above list will be crucial to our investigation. We can go ahead and examine the contents in the 7th packet. The content located in the HTML body is:
+
+{% highlight html %}
+<body>
+<span id="jWfnzfLhenIemfKFynaujTIQUhzZVHTcZuJaeFtmqBXYrwn"><iframe src="/index.phpmfKSxSANkeTeNrah.gif" onload="CkoNbET(event)" /></span></body></html>
+</body>
+{% endhighlight %}
+
+What we can gather from this information is that the page only displays a GIF, however there is much more under the hood. After noticing the onload tag inside the body, we can conclude that a script/element is being executed in the background once the page loads. The tag, "CkoNbET" points us to the head section of the HTML page, which is a container for data that is not displayed to the user. It makes sense that the attacker would not want the user to see this code, as it appears to be an HTML injection with JavaScript.
+
+![Figure Three](/img/Anna/fig3.PNG)
+
+Since I'm not particularly well versed in JavaScript, I found a JavaScript Unpacker via Google that will allow us to examine the contents of the malicious script. Once I plugged in the code, JSUnpack generated an alert ([report here](http://jsunpack.jeek.org/?report=2b795e345aeee9994d16bd1b203ade99fc7a3ad7))that this code exploits a memory handling vulnerability ([CVE-2010-0249](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0249)) in Internet Explorer! Now we have an understanding of how the attacker has accessed the system, the remaining traffic consists of thousands of TCP packets that the questions answer.
+
+<hr>
+<h1>Question 1</h1>
+<b>What was the full URI of Vick Timmes' original web request?</b>
+
+The answer to this question is pretty simple. Inside WireShark, examine the HTTP tree inside the first packet and the Full request URI field is the answer.
+
+{% highlight html %}
+http://10.10.10.10:8080/index.php
+{% highlight html %}
+
+<hr>
+<h1>Question 2</h1>
+<b>In response, the malicious web server sent back obfuscated JavaScript. Near the beginning of this code, the attacker created an array with 1300 elements labeled "COMMENT", then filled their data element with a string. What was the value of this string?</b>
+
+The long string in the JavaScript had tripped me up for a bit. Initially I spent some time trying to decode it, assuming that there was some sort of meaning behind it. After several failed attempts, I dived back into the JavaScript and noticed that the data element was filled with the string "vEI". 
+
+{% highlight javascript %}
+  qSNgVkOrdIjaiFpPTfDjbPHQppHSGtzpmOOyqEbLEFxNqAxicRyZKKWiRWmUaDHFOuzHPHqLrRFSzQuPusTnQyqpQwVpARdlR[i].data = "vEI";
+{% highlight javascript %}
+
+<hr>
+<h1>Question 3</h1>
+<b>Vick's computer made a second HTTP request for an object. What was the filename of the object that was requested? What is the MD5sum of the object that was returned?</b>
+
+This two part question asks about the GIF element that was loaded previously. To answer the first part of the question, we can look at the HTTP GET Request (Figure 1 Above) and see that the name of the file is "index.phpmfKSxSANkeTeNrah.gif". As for the second part, the easiest way to obtain the file directly from the packet capture in WireShark is to Export HTTP Objects, save them to a folder, then use the terminal to find the sum. To investigate this packet capture, I am using SIFT Workstation 3.0 and the terminal has an MD5 utility for me to use. 
+
+![Figure Three](/img/Anna/fig4.PNG)
+
+<hr>
+<h1>Question 4</h1>
+<b>When was the TCP session on port 4444 opened? </b> <i>(Provide the number of seconds since the beginning of the packet capture, rounded to tenths of a second. ie, 49.5 seconds)</i>
+
+To answer this question, I first used the expression filter to find the first occurrence of a system contacting the other on port 4444 with (tcp.dstport==4444). This occurred right after the HTML traffic we answered at the start, so I altered my expression filter to "tcp.stream eq 1". As seen in the figure below, the TCP handshake was initiated by Vicks machine (10.10.10.70) and acknowledged by the malicious host (10.10.10.70) on port 4444 at "23:40:00.6". 
+
+![Figure Five](/img/Anna/fig5.PNG)
+
+<u>Packet Capture Start:</u> 23:39:59.3
+<u>TCP 4444 Opened:</u> 23:40:00.6
+<u>Time Elapsed:</u> 1.3 seconds
+
+<hr>
+<h1>Question 5</h1>
+<b>When was the TCP session on port 4444 closed?</b><i>(Provide the number of seconds since the beginning of the packet capture, rounded to tenths of a second. ie, 49.5 seconds)</i>
+
+Using the same expression filter as above (tcp.stream eq 1), WireShark does the brute force of the work by locating the "FIN flag" for this TCP stream for me. All I need to do is scroll down to the end the list to see when the TCP connection on port 4444 was closed. 
+
+![Figure Six](/img/Anna/fig6.PNG)
+
+<u>Packet Capture Start:</u> 23:39:59.3
+<u>TCP 4444 Closed:</u> 23:41:26.9
+<u>Time Elapsed:</u> 87.5 seconds
+
+<hr>
+<h1>Question 6</h1>
+<b>In packet 17, the malicious server sent a file to the client. What type of file was it? What was the MD5sum of the file?</b>
+
+The question points us right to the packet where the data stream begins. Since the traffic is not encrypted, we can see the contents of the data stream. The first few bytes in the file transfer contains the file header. As seen in figure 6, the file header start with "MZ", meaning that the file transferred is a Windows executable. We can confirm this by the string "This File Cannot be executed in DOS mode".
+
+![Figure Seven](/img/Anna/fig7.PNG)
+
+The second part of the question asks us to locate the MD5 sum. While I was able to export HTTP objects to answer the first few questions, WireShark would not export Windows Executables. To workaround this, I simply followed the TCP Stream of the file transfer, then filtered the conversation to only show the packets sent from the malicious server to Vick's system, and finally saved it to a local folder without an extension (picture above). Similar to question 3, I used the "md5sum" utility to compute a hash for the Windows executable. You can see in the figure below that I also added the .exe extension to the file, but it generated the same MD5sum of "3b7f836dd107cf58c8aa94ff8b5720f6".
+
+![Figure Eight](/img/Anna/fig8.PNG)
+
+<hr>
+<h1>Question 7</h1>
+<b>Vick's computer repeatedly tried to connect back to the malicious server on port 4445, even after the original connection on port 4444 was closed. With respect to these repeated failed connection attempts: How often does the TCP initial sequence number (ISN) change? How often does the IP ID change? How often does the source port change?</b>
+
+To answer the first question, "How often does the TCP initial sequence number (ISN) change?", I want to see the packets where Vick's computer is attempting to connect to port 4445 on the malicious server. To do this, I enter "tcp.dstport == 4445" in the expression field. Now we can see all of the failed connection attempts that Vick's computer made to the malicious server. To find the sequence number, I need to dive into the packet details. When doing so, you can see that the sequence number remains at 0 for each and every attempt. However, actual sequence number can be located in hex code in the packet. 
+
+![Figure Nine](/img/Anna/fig9.PNG)
+
+Notice in the figure above how the sequence number field is the same, however the hex changes. In the figure below, 3 packets later, the hex changes but the relative sequence number changes. To answer the first question, the TCP initial sequence number changes every three packets! <i>*The filter I used hides the server response, which is why the frame is 1159 and not 1156</i>
+
+![Figure Ten](/img/Anna/fig10.PNG)
+
+The next piece of the question wants to know how often the IP ID changes. To answer this question, we simply look at the Identification field for each packet sent to the malicious server at port 4445. From what I gathered, the IP ID increments by one for each packet sent. 
+
+The final part of the question wants to know when the source port changes. As Vick's computer attempts to connect, we can see that after around 12 seconds or so his computer tries to connection a different port. This occurs from port 1037 until 1044, when his computer finally connects with the malicious server on port 4445.
+
+![Figure Eleven](/img/Anna/fig11.PNG)
+
+<hr>
+<h1>Question 8</h1>
+<b>Eventually, the malicious server responded and opened a new connection. When was the TCP connection on port 4445 first successfully completed?  (Provide the number of seconds since the beginning of the packet capture, rounded to tenths of a second. ie, 49.5 seconds)</b>
+
+After browsing through all of the connection attempts,  I located the  successful connection to port 4445 at packet 1657, which occurred at 23:42:02.98. 
+
+<u>Packet Capture Start:</u> 23:39:59.3
+<u>TCP 4444 Closed:</u> 23:42:03.0
+<u>Time Elapsed:</u> 124.3 seconds
+
+<hr>
+<h1>Question 9</h1>
+<b>Subsequently, the malicious server sent an executable file to the client on port 4445. What was the MD5 sum of this executable file?</b>
+
+To do this, I followed the exact same process as explained in question six. The answer is "78cfe283f752993959b4dbb74f41b87b".
+
+![Figure Twelve](/img/Anna/fig12.PNG)
+
+<hr>
+<h1>Question 10</h1>
+<b>When was the TCP connection on port 4445 closed? (Provide the number of seconds since the beginning of the packet capture, rounded to tenths of a second. ie, 49.5 seconds)</b>
+
+Simply enough, I went to the end of the TCP stream ("tcp.stream eq 41") and noted the time. To confirm this is the end of the TCP stream, the WireShark GUI highlighted the packets that flagged the FIN field. 
+
+![Figure Thirteen](/img/Anna/fig13.PNG)
+
+<hr>
+<h1>Conclusion</h1>
+
+That answers all of the questions for Ann's Aurora. A big thanks to the SANS Institute for hosting this challenge and keeping it alive online for me to improve my network forensics skills. I may revisit this challenge to decode 
