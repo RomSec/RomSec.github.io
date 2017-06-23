@@ -57,7 +57,7 @@ The long string in the JavaScript had tripped me up for a bit. Initially I spent
 
 {% highlight javascript %}
   qSNgVkOrdIjaiFpPTfDjbPHQppHSGtzpmOOyqEbLEFxNqAxicRyZKKWiRWmUaDHFOuzHPHqLrRFSzQuPusTnQyqpQwVpARdlR[i].data = "vEI";
-{% highlight javascript %}
+{% endhighlight %}
 
 <hr>
 <h1>Question 3</h1>
