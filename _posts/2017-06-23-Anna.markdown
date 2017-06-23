@@ -154,14 +154,14 @@ Simply enough, I went to the end of the TCP stream ("tcp.stream eq 41") and note
 
 <hr>
 <h1>Timeline</h1>
-<font color="green"> Packet Capture Start</font>
-> Vick clicks on phishing link, directed to malicious server
-> Hidden JavaScript hosted on web page executes on Vick's machine, exploiting CVE-2010-0249
-> Vick's machine downloads Windows Executable from malicious server over port 4444
-> Vick's machine repeatedly attempts to connect to malicious server over port 4445, but fails
-> Connection to port 4444 closes, connection to port 4445 opens
-> Vick's machine downloads another Windows Executable from malicious server port 4445
-> Connection on port 4445 closes
+<font color="green"> Packet Capture Start</font><br>
+> Vick clicks on phishing link, directed to malicious server<br>
+> Hidden JavaScript hosted on web page executes on Vick's machine, exploiting CVE-2010-0249<br>
+> Vick's machine downloads Windows Executable from malicious server over port 4444<br>
+> Vick's machine repeatedly attempts to connect to malicious server over port 4445, but fails<br>
+> Connection to port 4444 closes, connection to port 4445 opens<br>
+> Vick's machine downloads another Windows Executable from malicious server port 4445<br>
+> Connection on port 4445 closes<br>
 <font color="red"> Packet Capture End</font>
 
 
