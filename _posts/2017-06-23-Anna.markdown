@@ -76,8 +76,8 @@ To answer this question, I first used the expression filter to find the first oc
 
 ![Figure Five](/img/Anna/fig5.PNG)
 
-<u>Packet Capture Start:</u> 23:39:59.3
-<u>TCP 4444 Opened:</u> 23:40:00.6
+<u>Packet Capture Start:</u> 23:39:59.3<br>
+<u>TCP 4444 Opened:</u> 23:40:00.6<br>
 <u>Time Elapsed:</u> 1.3 seconds
 
 <hr>
@@ -88,8 +88,8 @@ Using the same expression filter as above (tcp.stream eq 1), WireShark does the 
 
 ![Figure Six](/img/Anna/fig6.PNG)
 
-<u>Packet Capture Start:</u> 23:39:59.3
-<u>TCP 4444 Closed:</u> 23:41:26.9
+<u>Packet Capture Start:</u> 23:39:59.3<br>
+<u>TCP 4444 Closed:</u> 23:41:26.9<br>
 <u>Time Elapsed:</u> 87.5 seconds
 
 <hr>
@@ -128,8 +128,8 @@ The final part of the question wants to know when the source port changes. As Vi
 
 After browsing through all of the connection attempts,  I located the  successful connection to port 4445 at packet 1657, which occurred at 23:42:02.98. 
 
-<u>Packet Capture Start:</u> 23:39:59.3
-<u>TCP 4445 Opened:</u> 23:42:03.0
+<u>Packet Capture Start:</u> 23:39:59.3<br>
+<u>TCP 4445 Opened:</u> 23:42:03.0<br>
 <u>Time Elapsed:</u> 124.3 seconds
 
 <hr>
@@ -148,9 +148,14 @@ Simply enough, I went to the end of the TCP stream ("tcp.stream eq 41") and note
 
 ![Figure Thirteen](/img/Anna/fig13.PNG)
 
-<u>Packet Capture Start:</u> 23:39:59.3
-<u>TCP 4445 Closed:</u> 23:43:17.8
+<u>Packet Capture Start:</u> 23:39:59.3 <br>
+<u>TCP 4445 Closed:</u> 23:43:17.8<br>
 <u>Time Elapsed:</u> 199.5 seconds
+
+<hr>
+<h1>Timeline</h1>
+
+
 
 <hr>
 <h1>Conclusion</h1>
