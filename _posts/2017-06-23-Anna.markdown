@@ -128,7 +128,7 @@ The final part of the question wants to know when the source port changes. As Vi
 After browsing through all of the connection attempts,  I located the  successful connection to port 4445 at packet 1657, which occurred at 23:42:02.98. 
 
 <u>Packet Capture Start:</u> 23:39:59.3
-<u>TCP 4444 Closed:</u> 23:42:03.0
+<u>TCP 4445 Opened:</u> 23:42:03.0
 <u>Time Elapsed:</u> 124.3 seconds
 
 <hr>
@@ -146,6 +146,10 @@ To do this, I followed the exact same process as explained in question six. The 
 Simply enough, I went to the end of the TCP stream ("tcp.stream eq 41") and noted the time. To confirm this is the end of the TCP stream, the WireShark GUI highlighted the packets that flagged the FIN field. 
 
 ![Figure Thirteen](/img/Anna/fig13.PNG)
+
+<u>Packet Capture Start:</u> 23:39:59.3
+<u>TCP 4445 Closed:</u> 23:43:17.8
+<u>Time Elapsed:</u> 199.5 seconds
 
 <hr>
 <h1>Conclusion</h1>
