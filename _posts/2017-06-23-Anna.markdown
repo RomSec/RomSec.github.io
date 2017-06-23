@@ -4,7 +4,7 @@ title:      "Anna's Aurora"
 subtitle:   "APT Challenge"
 date:       2017-06-23 16:20:00
 author:     "Chris"
-header-img: "img/Anna/.jpg"
+header-img: "img/Anna/header.jpg"
 ---
 
 Today we'll go over Ann'a Aurora, a pcap based forensic challenge hosted by the SANS Institute. The background for the incident is that a threat actor (Anna) is after a company secret, and she's been watching a lead developer (Vick) to find a way into the systems. One night, she notices that Vick initiates a secure connection with the company's headquarters and phishes Vick with a browser based zero-day. Unfortunately for the company, Vick clicks on the link and Anna now has access to the network. We've been assigned the role of analyzing captured traffic and build a timeline of events. 
