@@ -36,6 +36,7 @@ This TCP stream contains the only HTTP traffic in the packet capture, so the ele
 What we can gather from this information is that the page only displays a GIF, however there is much more under the hood. After noticing the onload tag inside the body, we can conclude that a script/element is being executed in the background once the page loads. The tag, "CkoNbET" points us to the head section of the HTML page, which is a container for data that is not displayed to the user. It makes sense that the attacker would not want the user to see this code, as it appears to be an HTML injection with JavaScript.
 
 ![Figure Three](/img/Anna/fig3.PNG)
+<i>*Right click > Open Image in New Tab :)</i>
 
 Since I'm not particularly well versed in JavaScript, I found a JavaScript Unpacker via Google that will allow us to examine the contents of the malicious script. Once I plugged in the code, JSUnpack generated an alert ([report here](http://jsunpack.jeek.org/?report=2b795e345aeee9994d16bd1b203ade99fc7a3ad7))that this code exploits a memory handling vulnerability ([CVE-2010-0249](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0249)) in Internet Explorer! Now we have an understanding of how the attacker has accessed the system, the remaining traffic consists of thousands of TCP packets that the questions answer.
 
