@@ -11,7 +11,7 @@ github_username:  romsec
 email_username:  romsec@protonmail.com
 # google_tracking_id:
 
-# Build settings
+# Build setting
 markdown: kramdown
 highlighter: rouge
 permalink: pretty
