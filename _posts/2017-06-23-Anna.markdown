@@ -47,7 +47,7 @@ The answer to this question is pretty simple. Inside WireShark, examine the HTTP
 
 {% highlight html %}
 http://10.10.10.10:8080/index.php
-{% highlight html %}
+{% endhighlight %}
 
 <hr>
 <h1>Question 2</h1>
