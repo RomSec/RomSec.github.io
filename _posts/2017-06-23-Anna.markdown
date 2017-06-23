@@ -168,4 +168,4 @@ Simply enough, I went to the end of the TCP stream ("tcp.stream eq 41") and note
 <hr>
 <h1>Conclusion</h1>
 
-That answers all of the questions for Ann's Aurora. A big thanks to the SANS Institute for hosting this challenge and keeping it alive online for me to improve my network forensics skills. I may revisit this challenge to decode 
+That answers all of the questions for Ann's Aurora. A big thanks to the SANS Institute for hosting this challenge and keeping it alive online for me to improve my network forensics skills. I may revisit this challenge to try and reverse engineer the malicious JavaScript.  
