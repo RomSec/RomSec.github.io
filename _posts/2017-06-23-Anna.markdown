@@ -7,9 +7,14 @@ author:     "Chris"
 header-img: "img/Anna/header.jpg"
 ---
 
-Today we'll go over Ann'a Aurora, a pcap based forensic challenge hosted by the SANS Institute. The background for the incident is that a threat actor (Anna) is after a company secret, and she's been watching a lead developer (Vick) to find a way into the systems. One night, she notices that Vick initiates a secure connection with the company's headquarters and phishes Vick with a browser based zero-day. Unfortunately for the company, Vick clicks on the link and Anna now has access to the network. We've been assigned the role of analyzing captured traffic and build a timeline of events. 
+Today we'll go over Ann'a Aurora, a pcap based forensic challenge hosted by the SANS Institute. The background for the incident is that a threat actor (Anna) is after a company secret, and she's been watching a lead developer (Vick) to find a way into the systems. One night, she notices that Vick initiates a secure connection with the company's headquarters and phishes Vick with a browser based zero-day. Unfortunately for the company, Vick clicks on the link and Anna now has access to the network. We've been assigned the role of analyzing captured traffic, build a timeline of events. and answer several challenging questions. 
 
-To start off, I want to get a clear picture of the IP addresses that I'll be dealing with. As seen in the figure below, 10.10.10.10 & 10.10.10.70 are the two main IP addresses that are communicating. We don't have to worry about 10.10.10.255 because it is a broadcast address for the network.
+<b>Here are the tools that I will be using today:</b>
+<li>SIFT Kit - Ubuntu 16.04</li>
+<li>WireShark</li>
+<li>MD5 Sum</li>
+
+To start off, I want to get a clear picture of the IP addresses that I'll be dealing with. As seen in the figure below, 10.10.10.10 & 10.10.10.70 are the two main IP addresses that are communicating to each other. We don't have to worry about 10.10.10.255 because it's a broadcast address for the network.
 
 ![Figure One](/img/Anna/fig1.PNG)
 
@@ -17,13 +22,13 @@ Now that we have an idea of the machines involved, we can start manually investi
 
 ![Figure Two](/img/Anna/fig2.PNG)
 
-Since we're in the information collecting phase, let's list out the relevant facts:
+Since we're in the information collecting phase, let's list out a timeline of events so far:
 
-<li>1) HTTP GET request from client(1035) to the web server(8080)</li> 
-<li>2-6) Acknowledge, sends data, acknowledge </li> 
-<li>7) Successful HTTP request, as well as the page text</li> 
-<li>8) Client requests .gif resource on page</li>
-<li>9-12) Web server sends .gif, acknowledgments, TCP stream ends</li>
+<li>Packet 1) HTTP GET request from client(1035) to the web server(8080)</li> 
+<li>Packets 2-6) Acknowledge, sends data, acknowledge </li> 
+<li>Packet 7) Successful HTTP request, as well as the page text</li> 
+<li>Packet 8) Client requests .gif resource on page</li>
+<li>Packetds 9-12) Web server sends .gif, acknowledgments, TCP stream ends</li>
 
 This TCP stream contains the only HTTP traffic in the packet capture, so the elements in the above list will be crucial to our investigation. We can go ahead and examine the contents in the 7th packet. The content located in the HTML body is:
 
