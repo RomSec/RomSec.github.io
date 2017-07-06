@@ -18,7 +18,7 @@ To start, I'll have a look at each email to try and gather some background infor
 
 <b>Email 1:</b>
 
-Thu, 18 May 2017 15:48:34 
+Thu, 18 May 2017 15:48:34<br>
 assistant@foxdifferlaw.com
 
 - Email seems personalized for Finster
@@ -27,8 +27,8 @@ assistant@foxdifferlaw.com
 
 <b>Email 2:</b>
 
+Thu, 18 May 2017 17:55:00<br>
 amwxihya607@how-to-grow-facial-hair-fast.com
-Thu, 18 May 2017 17:55:00
 
 - Suspicious sender email
 - Attached PDF (Possible IOC)
