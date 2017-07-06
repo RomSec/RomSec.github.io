@@ -16,7 +16,7 @@ To start, I'll have a look at each email to try and gather some background infor
 ![Figure One](/img/Fancy/email.jpg)
 
 
-Email 1:
+<b>Email 1:</b>
 
 Thu, 18 May 2017 15:48:34 
 assistant@foxdifferlaw.com
@@ -25,7 +25,7 @@ assistant@foxdifferlaw.com
 - Hyper link to suspicious domain (Possible IOC)
 (http://pardintworeb.ru/viewdoc/file.php?document=MjQwN3JvZ2VyLmZpbnN0ZXJAZmluc3RlcnMtZmluZS1qZXdlbHJ5LmNvbTg1NzE=)
 
-Email 2:
+<b>Email 2:</b>
 
 amwxihya607@how-to-grow-facial-hair-fast.com
 Thu, 18 May 2017 17:55:00
