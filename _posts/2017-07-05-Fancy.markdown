@@ -65,7 +65,11 @@ Interesting; the PDF file points to a Word Document embedded inside of it. I sim
 
 ![Figure Six](/img/Fancy/command.PNG)
 
-I examined both files that OfficeParser had spit out: Module_1.bas had no relevant information but This_Document.cls is full of it. While my reverse engineering skills are weak, I can tell that no normal Word document has this Visual Basic code embedded in it. I decided to search online to understand what's going on in this possibly malicious code. Using the md5sum utility against the document, I checked VirusTotal and found the document online. 
+I examined both files that OfficeParser had spit out: Module_1.bas had no relevant information but This_Document.cls is full of it. While my reverse engineering skills are weak, I can tell that no normal Word document has this Visual Basic code embedded in it. 
+
+![Figure Eight](/img/Fancy/macros.PNG)
+
+I decided to search online to understand what's going on in this possibly malicious code. Using the md5sum utility against the document, I checked VirusTotal and found the document online. 
 
 ![Figure Seven](/img/Fancy/virustotal.PNG)
 
