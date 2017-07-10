@@ -7,7 +7,7 @@ author:     "Chris"
 header-img: "img/VolBasics/memory.jpg"
 ---
 
-One area of digital forensics that I lack experience in is memory forensics. To improve, I located a trove of memory samples loaded with malicious artifacts (check the resources section at the end for more). My SANS DFIR Workstation has several PDF files on the desktop by default that are full of useful information when performing a memory analysis. For the memory sample I examined, I followed SANS analysis steps:
+One area of digital forensics that I lack experience in is memory forensics. To improve, I located a trove of memory samples loaded with malicious artifacts (check the resources section at the end for more). My SANS DFIR Workstation has several PDF files on the desktop by default that are full of useful information when performing a memory analysis. For the memory sample I examined, I loosely followed SANS analysis steps:
 
 1. Identify Rogue Processes
 2. Analyze Process DLLs and Handles
