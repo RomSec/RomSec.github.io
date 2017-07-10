@@ -3,7 +3,7 @@ layout:     post
 title:      "SANS Challenge"
 subtitle:   "Network Forensics Write-Up"
 date:       2017-06-14 16:20:00
-author:     "RomSec"
+author:     "Chris"
 header-img: "img/SANSChallenge/shark.jpg"
 ---
 
