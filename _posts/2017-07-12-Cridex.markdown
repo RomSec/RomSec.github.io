@@ -59,7 +59,7 @@ header-img: "img/Cridex/money.jpg"
 <p> To keep this post short, I wanted to focus on the basics of Volatility and show what information can be found with some digging. I could've written on about the behavior of the malware, but since I don't think I'll discover a zero-day anytime soon, I'll leave that writing to security researchers for now. Thanks for reading!</p>
 <hr>
 
-<h2>Resources</h2>
+<h1>Resources</h1>
 <p>[1] <a href="https://github.com/volatilityfoundation/volatility/wiki/Memory-Samples"><b>Memory-Samples</b></a></p>
 <p>[2] <a href="https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Win32%2FCridex"><b>Cridex Technical Info</b></a></p>
 <p>[3] <a href="https://digital-forensics.sans.org/blog/2012/07/24/mutex-for-malware-discovery-and-iocs/"><b>Mutex Objects & Malware</b></a></p>
