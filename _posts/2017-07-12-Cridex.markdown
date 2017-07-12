@@ -18,7 +18,7 @@ header-img: "img/Cridex/money.jpg"
 <h1>The Analysis</h1>
 
 <p> The first step I decided to take was to see the active/past connections that the infected host had made.</p>
-![One](/img/Cridex/connscan.PNG){:class="img-responsive center-block"}
+![One](/img/Cridex/connscan.PNG)
 <p class="text-center"><small>Connection Scan</small></p>
 
 <p>Hmmm, two different HTTP connections (8080 can be used for HTTP, usually for development servers) from the same PID. Further investigation into the two domains is that they have been used for Cridex infections before, meaning that this process could be malicious. I'll use the malfind plugin to get some more information.</p>
