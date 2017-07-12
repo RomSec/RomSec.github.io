@@ -1,0 +1,72 @@
+---
+layout:     post
+title:      "Cridex Analysis"
+subtitle:   "Memory Analysis with Volatility"
+date:       2017-07-12 16:20:00
+author:     "Chris"
+header-img: "img/Cridex/money.jpg"
+---
+
+<p>In my first Volatility write-up, I covered some of the basic commands and how to apply them using the SANS analysis steps. In this write-up, the malicious process has several interesting artifacts that have a bit more meat on the bones, allowing for a deeper analysis.</p>
+<hr>
+
+<h1>What are we working with?</h1>
+
+<p>The <a href="https://github.com/volatilityfoundation/volatility/wiki/Memory-Samples"><b>Volatility GitHub</b></a> page has many memory samples available for anyone to download. With many options, I decided to analyze a memory dump of a machine infected with the Cridex malware. I've heard of Cridex before, but off the top of my head don't know much about it. While it would have been beneficial to perform background research on the behavior of this malware, hunting for it was much more fun!</p>
+<hr>
+
+<h1>The Analysis</h1>
+
+<p> The first step I decided to take was to see the active/past connections that the infected host had made.</p>
+![One](/img/Cridex/connscan.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>Connection Scan</small></p>
+
+<p>Hmmm, two different HTTP connections (8080 can be used for HTTP, usually for development servers) from the same PID. Further investigation into the two domains is that they have been used for Cridex infections before, meaning that this process could be malicious. I'll use the malfind plugin to get some more information.</p>
+![Two](/img/Cridex/malfind.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>malfind</small></p>
+
+<p>This process is explorer.exe, AKA the File Explorer, which shouldn't be initiating connections to the web. As a forensic investigator, I need to use more than the malfind plugin to ensure that this file is actually malicious. To do this, I submitted the SHA-256 hash to VirusTotal and the following results were returned.</p>
+![Three](/img/Cridex/vtscan.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>explorer.exe</small></p>
+
+<p>To break apart the explorer.exe process further, I decide to use the vaddump command. This command will split the pages of the process allowing me to use a string search command. Once dumped, I want to check and see if the IP addresses from earlier are mentioned.</p>
+![Four](/img/Cridex/grep.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>String Search</small></p>
+
+<p>The process ending in "18ffff" has both of the IP addresses mentioned connected to. I submitted the SHA-256 hash of this page to VirusTotal but it came back clean. When I manually investigated the suspicious page, I found the URL that the infected host communicated with. While the remote address was different, the directory path was the same.</p>
+![Five](/img/Cridex/text.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>URL</small></p>
+
+<p>Another avenue I decided to explore was to check the handles of explorer.exe process.</p>
+![Five](/img/Cridex/mutant.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>Handles</small></p>
+
+<p>When using the handles plugin, the -t command is very helpful as it limits to an explicit type. Malware often uses mutex objects for reasons such as copying itself. When I searched the Mutant handles inside explorer.exe, I found some interesting results.</p>
+![Six](/img/Cridex/mutant.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>Handles</small></p>
+
+<p>The last few mutex objects starting with X raised a red flag, and further research proved that they are malicious handles found in malware. Since code is often reused, this is no surprise.</p>
+<p>Seeking more information pertaining to the behavior of the malware, the SANS Memory Analysis cheatsheet reminds me to check the registry. Malware often edits registry values; most commonly in the run folder to so that the malware starts upon user login.</p>
+![Seven](/img/Cridex/autorun.PNG){:class="img-responsive center-block"}
+![Eight](/img/Cridex/found.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>Found it!</small></p>
+
+<p>The command above printed out all of the keys in that registry folder; the screenshot above shows the red flag. I know that benign executable should not have it's own registry value when the user logs in. </p>
+<hr>
+
+<h1>Further Digging</h1>
+<p>Now that the smoking gun has been found, I decided to dump the entire explorer.exe process and manually investigate it. Whiles scrolling through the many pages, I noticed several URLs that focused around banking/financial institutions.</p>
+![Nine](/img/Cridex/bankdump.PNG){:class="img-responsive center-block"}
+<p class="text-center"><small>Hmmm..</small></p>
+<hr>
+
+<h1>Conclusion</h1>
+<p>Most of what has found can be backed up by the <a href="https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Win32%2FCridex"><b>Microsoft Malware Encyclopedia</b></a>. For example, Microsoft says that the URLs that I located are monitored by the malware to steal credentials. Definitely check out that link for more information, as it confirms much of what I found.</p>
+
+<p> To keep this post short, I wanted to focus on the basics of Volatility and show what information can be found with some digging. I could've written on about the behavior of the malware, but since I don't think I'll discover a zero-day anytime soon, I'll leave that writing to security researchers for now. Thanks for reading!</p>
+<hr>
+
+<h2>Resources</h2>
+<p>[1] <a href="https://github.com/volatilityfoundation/volatility/wiki/Memory-Samples"><b>Memory-Samples</b></a></p>
+<p>[2] <a href="https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Win32%2FCridex"><b>Cridex Technical Info</b></a></p>
+<p>[3] <a href="https://digital-forensics.sans.org/blog/2012/07/24/mutex-for-malware-discovery-and-iocs/"><b>Mutex Objects & Malware</b></a></p>
