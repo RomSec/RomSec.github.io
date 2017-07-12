@@ -22,7 +22,7 @@ header-img: "img/Cridex/money.jpg"
 <p class="text-center"><small><i>Connection Scan</i></small></p>
 
 <p>Hmmm, two different HTTP connections (8080 can be used for HTTP, usually for development servers) from the same PID. Further investigation into the two domains is that they have been used for Cridex infections before, meaning that this process could be malicious. I'll use the malfind plugin to get some more information.</p>
-![Two](/img/Cridex/malfind.PNG){:class="img-responsive center-block"}
+![Two](/img/Cridex/malfind.PNG)
 <p class="text-center"><small>malfind</small></p>
 
 <p>This process is explorer.exe, AKA the File Explorer, which shouldn't be initiating connections to the web. As a forensic investigator, I need to use more than the malfind plugin to ensure that this file is actually malicious. To do this, I submitted the SHA-256 hash to VirusTotal and the following results were returned.</p>
