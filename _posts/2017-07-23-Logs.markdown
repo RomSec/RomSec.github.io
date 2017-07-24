@@ -1,0 +1,133 @@
+---
+layout:     post
+title:      "Terminal Log Analysis"
+subtitle:   "Basic Commands"
+date:       2017-07-23 16:20:00
+author:     "Chris"
+header-img: "img/log/header.jpg"
+---
+
+<p>Instead of the usual CTF/Challenge posts, this post aims to cover basic command line tools tools that can be utilized to perform a log analysis as well as providing a few use-cases. When reviewing logs for artifacts or specific information, using powerful command line tools can be used to parse through big data. <i>This post is meant for the beginner crowd and is less technical. For more information, please reference the resources section.</i></p>
+<hr>
+
+<h1>Terminal Tools</h1>
+
+<h3>grep</h3>
+<p>Grep is a command line tool that is pre-installed most Linux distros. The tool allows the user to search for content in files, then prints them to the terminal. The search is based on a regular expression, or a pattern that is specified. The basic usage is as followed:</p>
+
+<p>grep [OPTIONS] [FILE]</p>
+
+<p>A great example of this usage can be seen in the output below. I've dumped pieces of a process that I believe to be malicious, and want to see which pieces involve the malicious URL. Unfourtunately, there's over 200 files and I don't want to waste time opening each file manually. Grep can check all of the files inside the directory to see if they match my regular expression (malicious IP address).</p>
+
+{% highlight bash %}
+chris@sift:~$ grep -r "41.168.5.140" /home/chris/volatility/cridex
+Binary file /home/chris/volatility/cridex/dump/1484.dmp matches
+Binary file /home/chris/volatility/cridex/explorer.exe.23dea70.0x021f0000-0x0222ffff.dmp matches
+Binary file /home/chris/volatility/cridex/explorer.exe.23dea70.0x00090000-0x0018ffff.dmp matches
+Binary file /home/chris/volatility/cridex/explorer.exe.23dea70.0x01cf0000-0x01deffff.dmp matches
+{% endhighlight %}
+
+<p>Grep narrowed down my search to four files of suspicion; much easier to manage! If you look back up at the output above, you'll notice my command used the "-r" tag. There are many options that can be used with grep to find exactly what you're looking for. In my case, the "-r" tag is used to search a directory recursively. Many other options can be found in the resources section below or by typing "grep --help" into the terminal.</p>
+
+<h3>awk</h3>
+<p>AWK is a powerful terminal based tool that uses a programming language for text-processing. It can be used in similar cases as grep to search for strings, as well as the capability of printing log files, performing mathematical operations, and more. </p>
+
+<p>I've found AWK to be extremely useful when searching through log files. Reference the ugly output below for example:</p>
+
+{% highlight bash %}
+chris@sift:~$ awk '{print}' ip_log 
+Aug 29 07:08:17 gw kernel: FW reject_input: IN=eth1 OUT= MAC=ff:ff:ff:ff:ff:ff:08:00:27:ba:7c:34:08:00 SRC=172.16.62.42 DST=172.16.62.255 LEN=44 TOS=0x00 PREC=0x00 TTL=64 ID=0 DF PROTO=UDP SPT=8610 DPT=8612 LEN=24
+{% endhighlight %}
+
+<p>There's a lot of information in the output that I'm not concerned with. The awk tool can take care of this by printing the information in the columns I need. In this case, I'm only concerned with the time and destination info.</p>
+
+{% highlight bash %}
+chris@sift:~$ awk '{print $3, $12, $21}' ip_log
+07:08:17 DST=172.16.62.255 DPT=8612
+{% endhighlight %}
+
+<p>Searching through a file with one entry may seem trivial, but when dealing with large log files with thousands of entries, having the pertinent data is crucial. The output below shows how awk can be used to print information neatly.  </p>
+
+{% highlight bash %}
+chris@sift:~$ awk 'BEGIN{printf "Date\tIP\t\tPort\n"} {print $3, $11, $20}' ip_log
+Date	 IP		             Port
+09:58:55 SRC=123.150.207.231 DPT=3306
+09:58:56 SRC=123.150.207.231 DPT=587
+09:58:56 SRC=123.150.207.231 DPT=53
+09:58:57 SRC=123.150.207.231 DPT=1720
+09:58:58 SRC=123.150.207.231 DPT=1723
+09:58:58 SRC=123.150.207.231 DPT=993
+09:58:59 SRC=123.150.207.231 DPT=8080
+09:58:59 SRC=123.150.207.231 DPT=445
+09:58:59 SRC=123.150.207.231 DPT=1025
+09:59:00 SRC=123.150.207.231 DPT=199
+09:59:01 SRC=123.150.207.231 DPT=113
+09:59:01 SRC=123.150.207.231 DPT=25
+09:59:02 SRC=123.150.207.231 DPT=110
+{% endhighlight %}
+
+<p>Check out the references section below for more information on awk and how it can be utilized.</p>
+
+<h3>Pipes</h3>
+<p>Pipes can be used in the terminal to separate and combine commands. A pipe is a simple character "|" (above the enter key) that is inserted between the commands. The use-case below lists out the system processes (ps aux) and prints the lines that include the string "chris" using grep.</p>
+
+{% highlight bash %}
+chris@sift:~$ ps aux | grep "chris"
+root      8010  0.0  0.0  74948  2060 pts/19   S    14:43   0:00 su chris
+sansfor+  8382  0.1  0.8 696936 36196 ?        Sl   16:53   0:02 gedit /home/chris/SWT-syslog_messages
+chris     8426  0.0  0.0  22648  1284 pts/19   R+   17:15   0:00 ps aux
+chris     8427  0.0  0.0  15948   912 pts/19   R+   17:15   0:00 grep --color=auto chris
+{% endhighlight %}
+
+<p>Here is a use-case for piping commands together when reviewing a log file.</p>
+
+{% highlight bash %}
+chris@sift:~$ awk '{print $3, $12, $20}' ip_log
+09:58:55 DST=98.252.16.36 DPT=3306
+09:58:56 DST=98.252.16.36 DPT=445
+09:58:56 DST=98.252.16.36 DPT=53
+09:58:57 DST=98.252.16.36 DPT=1720
+09:58:58 DST=98.252.16.36 DPT=1723
+09:58:58 DST=98.252.16.36 DPT=993
+09:58:59 DST=98.252.16.36 DPT=8080
+09:58:59 DST=98.252.16.36 DPT=445
+09:58:59 DST=98.252.16.36 DPT=1025
+09:59:00 DST=98.252.16.36 DPT=199
+09:59:01 DST=98.252.16.36 DPT=113
+09:59:01 DST=98.252.16.36 DPT=25
+09:59:02 DST=98.252.16.36 DPT=110
+{% endhighlight %}
+
+<p>Example: My company has suffered a data breach. The initial triage of the incident reveals that the attackers ex-filtrated data over port 445. While reviewing the network log for the infected machine, I'm given a heap of information. To sort through it, I've used awk to display the pertinent columns. Instead of manually extracting the fields that include port 445, I can pipe the grep command after my awk command to search for port 445.</p>
+
+{% highlight bash %}
+chris@sift:~$ awk '{print $3, $12, $20}' ip_log | grep "445"
+09:58:56 DST=98.252.16.36 DPT=445
+09:58:59 DST=98.252.16.36 DPT=445
+{% endhighlight %}
+
+<p>My search has yielded the two incidents where port 445 was involved. If I was dealing with a real log with thousands of entries, I could pipe another command on the end such as "wc" (word-count).
+
+{% highlight bash %}
+chris@sift:~$ awk '{print $3, $12, $20}' ip_log | grep "445" | wc -l
+2
+{% endhighlight %}
+<hr>
+
+<p>Hopefully this post has covered some basic usages of powerful command-line tools such as grep and awk. Check out the resources section below for more information on the tools covered. If those manuals are too much absorb, browse through Google to find more use cases of the commands.. that and practice are the best ways to learn!</p>
+
+https://www.tutorialspoint.com/unix_commands/grep.htm
+https://www.tutorialspoint.com/unix_commands/awk.htm
+http://info.slis.indiana.edu/~stevecox/unix/papers/wla/index.html
+
+
+<h2>Resources</h2>
+<p>[1] <a href="https://www.tutorialspoint.com/unix_commands/grep.htm"><b>Grep</b></a></p>
+<p>[2] <a href="https://www.tutorialspoint.com/unix_commands/awk.htm"><b>awk</b></a></p>
+<p>[3] <a href="http://www.linfo.org/pipes.html"><b>Pipes</b></a></p>
+<p>[4] <a href="https://www.loggly.com/ultimate-guide/analyzing-linux-logs/"><b>Analyzing Linux Logs</b></a></p>
+
+
+
+
+
