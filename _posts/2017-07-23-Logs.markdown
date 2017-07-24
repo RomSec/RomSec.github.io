@@ -7,7 +7,7 @@ author:     "Chris"
 header-img: "img/log/header.jpg"
 ---
 
-<p>Instead of the usual CTF/Challenge posts, this post aims to cover basic command line tools tools that can be utilized to perform a log analysis as well as providing a few use-cases. When reviewing logs for artifacts or specific information, using powerful command line tools can be used to parse through big data. <i>This post is meant for the beginner crowd and is less technical. For more information, please reference the resources section.</i></p>
+<p>Instead of the usual CTF/Challenge posts, this post aims to cover basic command line tools tools that can be utilized to perform a log analysis as well as providing a few use-cases. When reviewing logs for artifacts or specific information, using powerful command line tools can be used to parse through big data. <i>This post is meant for the beginner crowd and is less technical.</i></p>
 <hr>
 
 <h1>Terminal Tools</h1>
