@@ -4,7 +4,7 @@ title:      "VPN Quick Start Guide"
 subtitle:   "Set-up your own VPN Server in minutes!"
 date:       2017-07-26 16:20:00
 author:     "Chris"
-header-img: "img/VPN/header.jpg"
+header-img: "img/VPN/header2.jpg"
 ---
 
 <p>There are plenty of reasons to route your traffic through a VPN, such as a need to secure your traffic on public networks or you're privacy minded. Whatever the reason may be, there are dozens of quality VPN providers on the market. They offer excellent features such as no hassle setups and choosing the location of the exit server. However many of these companies lack transparency, meaning they may be selling your data or use your bandwidth for <a href="http://www.pcworld.com/article/2928340/ultra-popular-hola-vpn-extension-sold-your-bandwidth-for-use-in-a-botnet-attack.html">botnet attacks</a>.</p>
