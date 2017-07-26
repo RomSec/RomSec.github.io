@@ -71,8 +71,8 @@ bash openvpn-install.sh
 <b>Android</b>
 <p>The easiest way to load the .ovpn file to your Android system is to follow the same WinSCP steps as above. Once you have the file, email it as an attachment to yourself. Open your Android email client and download the .ovpn file. Now, download the OpenVPN Connect app > click the drop-down menu on the top-right > Import > Import Profile from SD card > Download > Select .ovpn file > Import > Connect (once redirected).</p>
 
-![Figure Four](/img/VPN/android1.PNG)
-![Figure Five](/img/VPN/android2.PNG)
+![Figure Four](/img/VPN/android1.png)
+![Figure Five](/img/VPN/android2.png)
 <hr>
 
 <p>To verify that our client has connected, SSH into the OpenVPN server and navigate to /etc/openvpn. Using sudo privileges, execute the following command and view the output.</p>
