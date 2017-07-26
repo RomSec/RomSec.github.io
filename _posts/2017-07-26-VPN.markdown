@@ -47,11 +47,11 @@ bash openvpn-install.sh
 
 ![Figure One](/img/VPN/setup.PNG)
 
-<li><b>- IP Address</b>Should load automatically, if not, CTRL+C and type ifconfig</li>
-<li><b>- Protocol</b>Select the recommended. TCP is more reliable, but UDP is faster (limited-bandwidth is always a factor for VPNs)</li>
-<li><b>- Port:</b>Use the default</li>
-<li><b>- DNS:</b>This is all preference. I selected OpenDNS because it's supposedly faster than Google, however whichever option you pick should work equally. <i>system resolvers is located in /etc/resolv.conf and is probably Google 8.8.8.8</i></li>
-<li><b>- Client name:</b>This should be the name of the client device that you'll connect to the VPN from. I recommend choosing a specific naming convention, especially if you have multiple devices. For this guide, I'll use my cell-phone.</li>
+<li><b>- IP Address:</b> Should load automatically, if not, CTRL+C and type ifconfig</li>
+<li><b>- Protocol:</b> Select the recommended. TCP is more reliable, but UDP is faster (limited-bandwidth is always a factor for VPNs)</li>
+<li><b>- Port:</b> Use the default</li>
+<li><b>- DNS:</b> This is all preference. I selected OpenDNS because it's supposedly faster than Google, however whichever option you pick should work equally. <i>system resolvers is located in /etc/resolv.conf and is probably Google 8.8.8.8</i></li>
+<li><b>- Client name:</b> This should be the name of the client device that you'll connect to the VPN from. I recommend choosing a specific naming convention, especially if you have multiple devices. For this guide, I'll use my cell-phone.</li>
 
 <p>Press any key to continue and watch magic unfold before your eyes. Once finished, check the name directory for a file that the client name and ends with .ovpn. That's the contains network information and certificate needed to connect to the OpenVPN server.</p>
 
@@ -93,9 +93,9 @@ sudo cat openvpn-status.log
 ![Figure Seven](/img/VPN/add.PNG)
 
 <h3>Enable Auto-start</h3>
-<p>If you followed this guide, when you reboot your server OpenVPN should start up by default. If it doesn't, this may be the messy answer [here](https://www.htpcbeginner.com/configure-openvpn-to-autostart-linux/). </p>
+<p>If you followed this guide, when you reboot your server OpenVPN should start up by default. If it doesn't, this may be the messy <a href="https://www.htpcbeginner.com/configure-openvpn-to-autostart-linux/">answer</a>. </p>
 
-<h3>Configure Fire-wall</h3>
+<h3>Configure Firewall Rules</h3>
 <p>I would highly recommend that you properly configure a firewall for your OpenVPN server. If not, you leave your server at risk of being compromised and/or receiving unwanted traffic. During my initial set-up, I spent many hours tooling around with iptables trying to find proper firewall rules that did not interrupt access to the VPN or SSH, yet blocked unwanted traffic. The solution below may not work in every situation, however it's worth a shot.
 
 <p>Create a file in your home directory called "iprules-openvpn" (name doesn't matter) and paste the code below into it.</p>
@@ -149,7 +149,7 @@ sudo cat openvpn-status.log
 COMMIT
 {% endhighlight %}
 
-<p>Now import these rules into your built-in firewall with iptables.</p>
+<p>Save & exit, then import these rules into your built-in firewall with iptables.</p>
 
 {% highlight bash %}
 iptables-restore < iprules.openvpn
@@ -159,7 +159,7 @@ iptables-restore < iprules.openvpn
 <hr>
 
 <h3>Is all my traffic secure?</h3>
-<p>Unfortunately no. The configuration above does not gaurentee that all traffic is fully-encrypted. For example, the VPN may leak your private IP when transmitting DNS queries. There are several security and performance implications to consider when tunneling 100% of your traffic. For more information on how to do this, see the [Arch Wiki OpenVPN](https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server) page for more. In my opinion, the best option would be to install vpnfailsafe and disable IPv6.</p>
+<p>Unfortunately no. The configuration above does not gaurentee that all traffic is fully-encrypted. For example, the VPN may leak your private IP when transmitting DNS queries. There are several security and performance implications to consider when tunneling 100% of your traffic. For more information on how to do this, see the <a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server">Arch Wiki OpenVPN</a> page for more. In my opinion, the best option would be to install vpnfailsafe and disable IPv6.</p>
 
 <hr>
 
