@@ -1,0 +1,180 @@
+---
+layout:     post
+title:      "Personal VPN Quick Start"
+subtitle:   "Set-up your own VPN Server in minutes!"
+date:       2017-07-26 16:20:00
+author:     "Chris"
+header-img: "img/VPN/header.jpg"
+---
+
+<p>There are plenty of reasons to route your traffic through a VPN, such as a need to secure your traffic on public networks or you're privacy minded. Whatever the reason may be, there are dozens of quality VPN providers on the market. They offer excellent features such as no hassle setups and choosing the location of the exit server. However many of these companies lack transparency, meaning they may be selling your data or use your bandwidth for botnet attacks (<i>see here</i>).</p>
+
+<p>To avoid any of these risks and ensure privacy, setting up your own VPN is a viable option. This guide will go through how to install, set-up, and secure a VPN to be used anywhere in the world on any of your devices. <i>Assumes you have general Linux knowledge</i></p>
+<hr>
+
+<h1>Picking a Host</h1>
+
+<p>The first step to setting up your own VPN is to select a server. There are a few options that you can pick from listed below.</p>
+
+<li><b>- Web Hosting:</b> This is my preferred method to hosting a VPN (and the method this guide will follow). Opinions vary, but DigitalOcean or Linode are the top two in my eyes. The costs should be around $5/month and include 20GB of storage if you'd like to use the server for anything else (ie, your own cloud server). Promo Codes are readily available for both of these sites as well; Google it.</li>
+<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be viable option</li>
+<li><b>- Virtual Machine:</b> It's possible to set-up a VPN server inside a virtual machine, meaning there may not be any associated costs. However, improper configuration may leave your private network vulnerable. Use at your own risk</li>
+<hr>
+
+<h1>First Steps</h1>
+<p>If you chose a web-host, chances are the have a list of containers that you can pick from to be installed to your server. I decided to go with DigitalOcean web-hosting and chose their Ubuntu 17.04 x64 "droplet", which was automatically loaded into my server. I received an email with SSH login information.</p>
+
+<p>Once your server has an OS loaded onto it, there are several highly recommended hardening steps to start off with. Whenever you send traffic over the VPN, you'll expose the VPN public IP to logs. From a security perspective, there's a risk that someone with malicious intent could attempt to break into your system. To reduce this risk, implementing proper security controls and reducing the attack surface is key. Here are some quick tips:</p>
+
+<li><b>- Create a new user:</b> Logging in and administering the server with the root account means that all privileges are available and anything can be executed. To limit this risk, create a limited user account with sudo privileges</li>
+<li><b>- Harden SSH:</b> SSH will be crucial to administer the server. To secure SSH, disable root logins, configure SSH keys, and install Fail2Ban to prevent brute-force attacks</li>
+<li><b>- Other:</b> Remove unneccessary network services, use nmap to see what's exposed, configure proper firewall settings (ie: iptables, UFW, pFsense)</li>
+
+<h1>OpenVPN Server Set-Up</h1>
+<p>The server we'll be using is called OpenVPN, which is one of the most widely used open-source VPN servers. On top of that, there's years of troubleshooting history to be found on Google, and it supports virtually all devices (iOS, Android, Windows, etc). Manual installation allows you to configure many settings, however beginners or anyone wishing for a quick set up should use Nyr's shell script.</p>
+
+<p>Firstly, navigate to the directory that you wish for your settings and files to be saved to. Then, execute the script below</p>
+{% highlight bash %}
+wget https://git.io/vpn -O openvpn-install.sh
+{% endhighlight %}
+
+<p>Now that the script has been installed, run it!</p>
+{% highlight bash %}
+bash openvpn-install.sh
+{% endhighlight %}
+
+<p>Follow the prompts that the program provides.</p>
+
+![Figure One](/img/VPN/setup.PNG)
+
+<li><b>- IP Address</b>Should load automatically, if not, CTRL+C and type ifconfig</li>
+<li><b>- Protocol</b>Select the recommended. TCP is more reliable, but UDP is faster (limited-bandwidth is always a factor for VPNs)</li>
+<li><b>- Port:</b>Use the default</li>
+<li><b>- DNS:</b>This is all preference. I selected OpenDNS because it's supposedly faster than Google, however whichever option you pick should work equally. <i>system resolvers is located in /etc/resolv.conf and is probably Google 8.8.8.8</i></li>
+<li><b>- Client name:</b>This should be the name of the client device that you'll connect to the VPN from. I recommend choosing a specific naming convention, especially if you have multiple devices. For this guide, I'll use my cell-phone.</li>
+
+<p>Press any key to continue and watch magic unfold before your eyes. Once finished, check the name directory for a file that the client name and ends with .ovpn. That's the contains network information and certificate needed to connect to the OpenVPN server.</p>
+
+<hr>
+<h1>Transfer and Installation</h1>
+<p>For me, the easiest way to securely transferring the .opvn file is over WinSCP. Download the WinSCP utility, and log in as you normally would via SSH.</p>
+
+![Figure Two](/img/VPN/winscp.PNG)
+
+<p>Right click on the file, then select download. Now the .ovpn file should be on your local system and you're ready to transfer it to a client. If that local system is your client, install the OpenVPN source/executable and run it.</p>
+
+<b>Windows</b>
+<p>If you're using a Windows machine, run the OpenVPN set-up and select the default configurations. Next, right click on the OpenVPN icon located in the bottom-right portion of your task bar. Click import file and select the .ovpn file downloaded earlier. By default, OpenVPN will import that file into C:\Users\yourname\OpenVPN\config so you can safely delete the downloaded file.</p>
+
+![Figure Three](/img/VPN/gui.PNG)
+
+<b>Android</b>
+<p>The easiest way to load the .ovpn file to your Android system is to follow the same WinSCP steps as above. Once you have the file, email it as an attachment to yourself. Open your Android email client and download the .ovpn file. Now, download the OpenVPN Connect app > click the drop-down menu on the top-right > Import > Import Profile from SD card > Download > Select .ovpn file > Import > Connect (once redirected).</p>
+
+![Figure Four](/img/VPN/android1.PNG)
+![Figure Five](/img/VPN/android2.PNG)
+<hr>
+
+<p>To verify that our client has connected, SSH into the OpenVPN server and navigate to /etc/openvpn. Using sudo privileges, execute the following command and view the output.</p>
+
+{% highlight bash %}
+sudo cat openvpn-status.log
+{% endhighlight %}
+
+![Figure Six](/img/VPN/success.PNG)
+<hr>
+
+<h1>Further Set-up/Tips</h1>
+<p>Now that you're VPN has been set-up and is successful, there's a few other routes to go down.</p>
+
+<h3>I want to add or revoke a client</h3>
+<p>This is very easy to do with the script. Simply navigate back to the directory in which the OpenVPN shell-script is installed. Then execute it with bash and follow the prompts. </p>
+
+![Figure Seven](/img/VPN/add.PNG)
+
+<h3>Enable Auto-start</h3>
+<p>If you followed this guide, when you reboot your server OpenVPN should start up by default. If it doesn't, this may be the messy answer [here](https://www.htpcbeginner.com/configure-openvpn-to-autostart-linux/). </p>
+
+<h3>Configure Fire-wall</h3>
+<p>I would highly recommend that you properly configure a firewall for your OpenVPN server. If not, you leave your server at risk of being compromised and/or receiving unwanted traffic. During my initial set-up, I spent many hours tooling around with iptables trying to find proper firewall rules that did not interrupt access to the VPN or SSH, yet blocked unwanted traffic. The solution below may not work in every situation, however it's worth a shot.
+
+<p>Create a file in your home directory called "iprules-openvpn" (name doesn't matter) and paste the code below into it.</p>
+
+{% highlight bash %}
+*filter
+
+# Allow all loopback (lo) traffic and reject anything
+# to localhost that does not originate from lo.
+-A INPUT -i lo -j ACCEPT
+-A INPUT ! -i lo -s 127.0.0.0/8 -j REJECT
+-A OUTPUT -o lo -j ACCEPT
+
+# Allow ping and ICMP error returns.
+-A INPUT -p icmp -m state --state NEW --icmp-type 8 -j ACCEPT
+-A INPUT -p icmp -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A OUTPUT -p icmp -j ACCEPT
+
+# Allow SSH.
+-A INPUT -i eth0 -p tcp -m state --state NEW,ESTABLISHED --dport 22 -j ACCEPT
+-A OUTPUT -o eth0 -p tcp -m state --state ESTABLISHED --sport 22 -j ACCEPT
+
+# Allow UDP traffic on port 1194.
+-A INPUT -i eth0 -p udp -m state --state NEW,ESTABLISHED --dport 1194 -j ACCEPT
+-A OUTPUT -o eth0 -p udp -m state --state ESTABLISHED --sport 1194 -j ACCEPT
+
+# Allow DNS resolution and limited HTTP/S on eth0.
+# Necessary for updating the server and keeping time.
+-A INPUT -i eth0 -p udp -m state --state ESTABLISHED --sport 53 -j ACCEPT
+-A OUTPUT -o eth0 -p udp -m state --state NEW,ESTABLISHED --dport 53 -j ACCEPT
+-A INPUT -i eth0 -p tcp -m state --state ESTABLISHED --sport 80 -j ACCEPT
+-A INPUT -i eth0 -p tcp -m state --state ESTABLISHED --sport 443 -j ACCEPT
+-A OUTPUT -o eth0 -p tcp -m state --state NEW,ESTABLISHED --dport 80 -j ACCEPT
+-A OUTPUT -o eth0 -p tcp -m state --state NEW,ESTABLISHED --dport 443 -j ACCEPT
+
+# Allow traffic on the TUN interface.
+-A INPUT -i tun0 -j ACCEPT
+-A OUTPUT -o tun0 -j ACCEPT
+
+# Log any packets which don't fit the rules above...
+# (optional but useful)
+-A INPUT -m limit --limit 3/min -j LOG --log-prefix "iptables_INPUT_denied: " --log-level 4
+-A FORWARD -m limit --limit 3/min -j LOG --log-prefix "iptables_FORWARD_denied: " --log-level 4
+-A OUTPUT -m limit --limit 3/min -j LOG --log-prefix "iptables_OUTPUT_denied: " --log-level 4
+
+# then reject them.
+-A INPUT -j REJECT
+-A FORWARD -j REJECT
+-A OUTPUT -j REJECT
+
+COMMIT
+{% endhighlight %}
+
+<p>Now import these rules into your built-in firewall with iptables.</p>
+
+{% highlight bash %}
+iptables-restore < iprules.openvpn
+{% endhighlight %}
+
+<p>These rules are by-far my favorite solution that I've found online. It allows all of the VPN and SSH traffic into your system, while rejecting other traffic. You can customize these rules if you need other ports open, would rather DROP the packets, etc.</p>
+<hr>
+
+<h3>Is all my traffic secure?</h3>
+<p>Unfortunately no. The configuration above does not gaurentee that all traffic is fully-encrypted. For example, the VPN may leak your private IP when transmitting DNS queries. There are several security and performance implications to consider when tunneling 100% of your traffic. For more information on how to do this, see the [Arch Wiki OpenVPN](https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server) page for more. In my opinion, the best option would be to install vpnfailsafe and disable IPv6.</p>
+
+<hr>
+
+
+<p>Setting up a VPN can either take hours or minutes depending on your personal configuration preferences. Keep in mind that your three top concerns for this VPN server should be reliability, speed, and security. Thanks for viewing!</p>
+
+
+<h2>Resources</h2>
+<p>[1] <a href="https://github.com/Nyr/openvpn-install"><b>OpenVPN Road Warrior</b></a></p>
+<p>[2] <a href="https://openvpn.net/index.php/download/community-downloads.html"><b>OpenVPN Client Downloads</b></a></p>
+<p>[3] <a href="https://openvpn.net/index.php/open-source/documentation/howto.html"><b>OpenVPN Documentation</b></a></p>
+<p>[4] <a href="https://www.linode.com/docs/networking/vpn/set-up-a-hardened-openvpn-server"><b>Hardening an OpenVPN server</b></a></p>
+<p>[1] <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04"><b>Detailed OpenVPN Set-Up</b></a></p>
+
+
+
+
+
