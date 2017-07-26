@@ -7,7 +7,7 @@ author:     "Chris"
 header-img: "img/VPN/header.jpg"
 ---
 
-<p>There are plenty of reasons to route your traffic through a VPN, such as a need to secure your traffic on public networks or you're privacy minded. Whatever the reason may be, there are dozens of quality VPN providers on the market. They offer excellent features such as no hassle setups and choosing the location of the exit server. However many of these companies lack transparency, meaning they may be selling your data or use your bandwidth for botnet attacks (<i>see here</i>).</p>
+<p>There are plenty of reasons to route your traffic through a VPN, such as a need to secure your traffic on public networks or you're privacy minded. Whatever the reason may be, there are dozens of quality VPN providers on the market. They offer excellent features such as no hassle setups and choosing the location of the exit server. However many of these companies lack transparency, meaning they may be selling your data or use your bandwidth for [botnet attacks](http://www.pcworld.com/article/2928340/ultra-popular-hola-vpn-extension-sold-your-bandwidth-for-use-in-a-botnet-attack.html).</p>
 
 <p>To avoid any of these risks and ensure privacy, setting up your own VPN is a viable option. This guide will go through how to install, set-up, and secure a VPN to be used anywhere in the world on any of your devices. <i>Assumes you have general Linux knowledge</i></p>
 <hr>
