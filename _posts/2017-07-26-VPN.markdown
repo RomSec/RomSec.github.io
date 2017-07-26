@@ -172,7 +172,7 @@ iptables-restore < iprules.openvpn
 <p>[2] <a href="https://openvpn.net/index.php/download/community-downloads.html"><b>OpenVPN Client Downloads</b></a></p>
 <p>[3] <a href="https://openvpn.net/index.php/open-source/documentation/howto.html"><b>OpenVPN Documentation</b></a></p>
 <p>[4] <a href="https://www.linode.com/docs/networking/vpn/set-up-a-hardened-openvpn-server"><b>Hardening an OpenVPN server</b></a></p>
-<p>[1] <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04"><b>Detailed OpenVPN Set-Up</b></a></p>
+<p>[5] <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-16-04"><b>Detailed OpenVPN Set-Up</b></a></p>
 
 
 
