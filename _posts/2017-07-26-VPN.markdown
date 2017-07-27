@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "VPN Quick Start Guide"
-subtitle:   "Set-up your own VPN Server in minutes!"
+subtitle:   "Set-up your own VPN Server in minutes"
 date:       2017-07-26 16:20:00
 author:     "Chris"
 header-img: "img/VPN/header2.jpg"
@@ -17,7 +17,7 @@ header-img: "img/VPN/header2.jpg"
 <p>The first step to setting up your own VPN is to select a server. There are a few options that you can pick from listed below.</p>
 
 <li><b>- Web Hosting:</b> This is my preferred method to hosting a VPN (and the method this guide will follow). Opinions vary, but DigitalOcean or Linode are the top two in my eyes. The costs should be around $5/month and include 20GB of storage if you'd like to use the server for anything else (ie, your own cloud server). Promo Codes are readily available for both of these sites as well; Google it.</li>
-<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be a viable option.</li>
+<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be a viable option. This option may also expose your home/local network.</li>
 <li><b>- Virtual Machine:</b> It's possible to set-up a VPN server inside a virtual machine, meaning there may not be any associated costs. However, improper configuration may leave your private network vulnerable. Use at your own risk!</li>
 <hr>
 
@@ -26,14 +26,14 @@ header-img: "img/VPN/header2.jpg"
 
 <p>Once your server has an OS loaded onto it, there are several highly recommended hardening steps to start off with. Whenever you send traffic over the VPN, you'll expose the VPN public IP to logs. From a security perspective, there's a risk that someone with malicious intent could attempt to break into your system. To reduce this risk, implementing proper security controls and reducing the attack surface is key. Here are some quick tips:</p>
 
-<li><b>- Create a new user:</b> Logging in and administering the server with the root account means that all privileges are available and anything can be executed. To limit this risk, create a limited user account with sudo privileges</li>
-<li><b>- Harden SSH:</b> SSH will be crucial to administer the server. To secure SSH, disable root logins, configure SSH keys, and install Fail2Ban to prevent brute-force attacks</li>
-<li><b>- Other:</b> Remove unneccessary network services, use nmap to see what's exposed, configure proper firewall settings (ie: iptables, UFW, pFsense)</li>
+<li><b>- Create a new user:</b> Logging in and administering the server with the root account means that all privileges are available and anything can be executed. To limit this risk, create a limited user account with sudo privileges.</li>
+<li><b>- Harden SSH:</b> SSH may be needed administer the server. To secure SSH, disable root logins, configure SSH keys, and install Fail2Ban to prevent brute-force attacks.</li>
+<li><b>- Other:</b> Remove unneccessary network services, use nmap to see what's exposed, configure proper firewall settings (ie: iptables, UFW, pFsense).</li>
 
 <h1>OpenVPN Server Set-Up</h1>
 <p>The server we'll be using is called OpenVPN, which is one of the most widely used open-source VPN servers. On top of that, there's years of troubleshooting history to be found on Google, and it supports virtually all devices (iOS, Android, Windows, etc). Manual installation allows you to configure many settings, however beginners or anyone wishing for a quick set up should use Nyr's shell script.</p>
 
-<p>Firstly, navigate to the directory that you wish for your settings and files to be saved to. Then, execute the script below</p>
+<p>Firstly, navigate to the directory that you wish for your settings and files to be saved to. Then, execute the script below.</p>
 {% highlight bash %}
 wget https://git.io/vpn -O openvpn-install.sh
 {% endhighlight %}
