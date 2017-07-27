@@ -14,11 +14,11 @@ header-img: "img/VPN/header2.jpg"
 
 <h1>Picking a Host</h1>
 
-<p>The first step to setting up your own VPN is to select a server. There are a few options that you can pick from listed below.</p>
+<p>The first step to setting up your own VPN is to select a server. You could use your own computer, however the idea is to have a server that's always online for accessibility.  There are a few options that you can pick from listed below.</p>
 
 <li><b>- Web Hosting:</b> This is my preferred method to hosting a VPN (and the method this guide will follow). Opinions vary, but DigitalOcean or Linode are the top two in my eyes. The costs should be around $5/month and include 20GB of storage if you'd like to use the server for anything else (ie, your own cloud server). Promo Codes are readily available for both of these sites as well; Google it.</li>
-<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be a viable option. This option may also expose your home/local network.</li>
-<li><b>- Virtual Machine:</b> It's possible to set-up a VPN server inside a virtual machine, meaning there may not be any associated costs. However, improper configuration may leave your private network vulnerable. Use at your own risk!</li>
+<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be viable. This option may expose your home/local network.</li>
+<li><b>- Virtual Machine:</b> It's possible to set-up a VPN server inside a virtual machine, meaning there may not be any associated costs. Accessibility may be a problem since the host machine needs to remain powered. However, improper configuration may leave your private network vulnerable. Use at your own risk!</li>
 <hr>
 
 <h1>First Steps</h1>
@@ -159,12 +159,12 @@ iptables-restore < iprules.openvpn
 <hr>
 
 <h3>Is all my traffic secure?</h3>
-<p>Unfortunately no. The configuration above does not gaurentee that all traffic is fully-encrypted. For example, the VPN may leak your private IP when transmitting DNS queries. There are several security and performance implications to consider when tunneling 100% of your traffic. For more information on how to do this, see the <a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server">Arch Wiki OpenVPN</a> page for more. In my opinion, the best option would be to install vpnfailsafe and disable IPv6.</p>
+<p>Unfortunately no. The configuration above does not gaurentee that all traffic is fully-encrypted. For example, the VPN may leak your private IP when transmitting DNS queries. There are several security and performance implications to consider when tunneling 100% of your traffic. For more information on how to do this, see the <a href="https://wiki.archlinux.org/index.php/OpenVPN#Routing_all_client_traffic_through_the_server">Arch Wiki OpenVPN</a> page for more. In my opinion, the best option would be to install <a href="https://github.com/wknapik/vpnfailsafe">vpnfailsafe</a> and disable IPv6.</p>
 
 <hr>
 
 
-<p>Setting up a VPN can either take hours or minutes depending on your personal configuration preferences. Keep in mind that your three top concerns for this VPN server should be reliability, speed, and security. Thanks for viewing!</p>
+<p>Setting up a VPN can either take hours or minutes depending on your personal configuration preferences. Keep in mind that your three top concerns when considering a VPN server should be reliability, speed, and security. Thanks for viewing!</p>
 
 
 <h2>Resources</h2>
