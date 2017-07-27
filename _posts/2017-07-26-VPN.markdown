@@ -9,7 +9,7 @@ header-img: "img/VPN/header2.jpg"
 
 <p>There are plenty of reasons to route your traffic through a VPN, such as a need to secure your traffic on public networks or you're privacy minded. Whatever the reason may be, there are dozens of quality VPN providers on the market. They offer excellent features such as no hassle setups and choosing the location of the exit server. However many of these companies lack transparency, meaning they may be selling your data or use your bandwidth for <a href="http://www.pcworld.com/article/2928340/ultra-popular-hola-vpn-extension-sold-your-bandwidth-for-use-in-a-botnet-attack.html">botnet attacks</a>.</p>
 
-<p>To avoid any of these risks and ensure privacy, setting up your own VPN is a viable option. This guide will go through how to install, set-up, and secure a VPN to be used anywhere in the world on any of your devices. <i>Assumes you have general Linux knowledge</i></p>
+<p>To avoid any of these risks and ensure privacy, setting up your own VPN is a viable option. This guide will go through how to install, set-up, and secure a VPN to be used anywhere in the world on any of your devices.</p>
 <hr>
 
 <h1>Picking a Host</h1>
@@ -17,12 +17,12 @@ header-img: "img/VPN/header2.jpg"
 <p>The first step to setting up your own VPN is to select a server. There are a few options that you can pick from listed below.</p>
 
 <li><b>- Web Hosting:</b> This is my preferred method to hosting a VPN (and the method this guide will follow). Opinions vary, but DigitalOcean or Linode are the top two in my eyes. The costs should be around $5/month and include 20GB of storage if you'd like to use the server for anything else (ie, your own cloud server). Promo Codes are readily available for both of these sites as well; Google it.</li>
-<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be viable option</li>
-<li><b>- Virtual Machine:</b> It's possible to set-up a VPN server inside a virtual machine, meaning there may not be any associated costs. However, improper configuration may leave your private network vulnerable. Use at your own risk</li>
+<li><b>- RaspBerry Pi:</b> My first ever VPN was set-up via a RaspBerry Pi. Unlike a web-host, the RaspBerry Pi has a small upfront cost ($35ish) but no reoccurring cost. There's a bit more configuration needed for your private networks router as well. If you're at a university or housing complex without access to the router settings, this may not be a viable option.</li>
+<li><b>- Virtual Machine:</b> It's possible to set-up a VPN server inside a virtual machine, meaning there may not be any associated costs. However, improper configuration may leave your private network vulnerable. Use at your own risk!</li>
 <hr>
 
 <h1>First Steps</h1>
-<p>If you chose a web-host, chances are the have a list of containers that you can pick from to be installed to your server. I decided to go with DigitalOcean web-hosting and chose their Ubuntu 17.04 x64 "droplet", which was automatically loaded into my server. I received an email with SSH login information.</p>
+<p>If you chose a web-host, chances are they have a list of containers that you can pick from to be installed to your server. I decided to go with DigitalOcean web-hosting and chose their Ubuntu 17.04 x64 "droplet", which was automatically loaded into my server. I received an email with SSH login information.</p>
 
 <p>Once your server has an OS loaded onto it, there are several highly recommended hardening steps to start off with. Whenever you send traffic over the VPN, you'll expose the VPN public IP to logs. From a security perspective, there's a risk that someone with malicious intent could attempt to break into your system. To reduce this risk, implementing proper security controls and reducing the attack surface is key. Here are some quick tips:</p>
 
