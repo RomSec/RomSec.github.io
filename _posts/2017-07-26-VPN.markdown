@@ -33,7 +33,7 @@ header-img: "img/VPN/header2.jpg"
 <h1>OpenVPN Server Set-Up</h1>
 <p>The server we'll be using is called OpenVPN, which is one of the most widely used open-source VPN servers. On top of that, there's years of troubleshooting history to be found on Google, and it supports virtually all devices (iOS, Android, Windows, etc). Manual installation allows you to configure many settings, however beginners or anyone wishing for a quick set up should use Nyr's shell script.</p>
 
-<p>Firstly, navigate to the directory that you wish for your settings and files to be saved to. Then, execute the script below.</p>
+<p>First, navigate to the directory that you wish for your settings and files to be saved to. Then, execute the script below.</p>
 {% highlight bash %}
 wget https://git.io/vpn -O openvpn-install.sh
 {% endhighlight %}
