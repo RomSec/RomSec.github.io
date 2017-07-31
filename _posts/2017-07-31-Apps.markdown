@@ -73,11 +73,10 @@ header-img: "img/apps/header2.png"
 <h2>Google Keep</h2>
 <p>For years I searched for the perfect note-taking and reminder application. I struggled using the Windows default sticky notes which was always a mess, sending email reminders or myself, and long, cluttered Word documents. When I discovered Google Keep, many of these issues were remediated. Google Keep can store notes on their Cloud that can be accessed from your desktop, to their web and mobile applications (there's even a handy widget on Android). Your reminders, lists, notes, pictures, drawings, etc can all be stored on Google Keep. You can color-code the "notes", place them in different folders, set reminders, etc! One use case for Google Keep is to set a to do list, which reminds you each day at a certain time. I constantly update this list, check off what's been done, and am always reminded at 8AM each morning.</p>
 
-![Figure Four](/img/Apps/windirstat.PNG)
-
 <a href="https://keep.google.com/"><b>Google Keep</b></a>
 <hr>
 
+<h2>What Else?</h2>
 <p>There are many other applications that I use on a daily basis, such as Intel XTU to monitor my hardware, CCleaner to clear junk, MalwareBytes to protect my computer, and much more. If you want to download multiple utilities for your computer at once, check out <a href="https://ninite.com/">Ninite</a>. You can simply check off the applications you wish to install on your computer and Ninite will package all of the respective set-up files in a simple installer. If you have any programs/utilities that you can't live without on your Windows PC, feel free to <a href="https://romcybersec.com/contact">contact<</a> and tell me more.</p>
 
 
