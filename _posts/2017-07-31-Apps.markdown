@@ -1,0 +1,95 @@
+---
+layout:     post
+title:      "Must Have Windows Applications"
+subtitle:   "Various Desktop Applications to use"
+date:       2017-07-31 16:20:00
+author:     "Chris"
+header-img: "img/apps/header.jpg"
+---
+
+<p>A little more than a decade ago, my brother and I bought our first computer: an eMachines desktop that ran Windows XP. Since then, I've tooled around with Unix but have primarily used Windows for work and entertainment. Below you will find a curated list of exceptional applications that I used on my Windows machine.</p>
+<hr>
+
+<h2>Sublime Text Editor</h2>
+
+<p>I was introduced to Sublime Text Editor a year ago. Since then, I sparingly use the default Notepad application unless Windows opens it automatically. Sublime has many wonderful features, such as auto-highlighting various languages, split editing one file (on different window panes), a built in Python console, and seemingly limitless customization. This customization includes thousands of packages, many of which are user created. These packages vary from different color themes that you can install, snippets that can auto-fill, advanced spell-checks, and more. Sublime does not have an advanced GUI, so it may seem foreign if you're used to using Word or NotePad++. Sublime is a licensed product, however you can download the free/unregistered version and use it as long as you'd like.</p>
+
+![Figure One](/img/Apps/sublime.PNG)
+
+<a href="https://www.sublimetext.com/3"><b>Download</b></a>
+<a href="https://packagecontrol.io/"><b>Packages</b></a>
+<hr>
+
+<h2>KeePass</h2>
+
+<p>There are dozens of password managers to chose from online. There are some popular plug-and-play managers such as LastPass and Dashlane that integrate directly into your web browser. However, in the past few years these applications have been hit with data breaches leaving your information at risk.</p>
+
+<p>To combat this risk, I chose to use KeePass two years ago and haven't looked back. KeePass is a lightweight, open-source password manager that can be installed on all operating systems and mobile phones. Simply install the program on your device and create your password database. If you want access the database on multiple systems, place the file into a cloud service such as Google Drive or DropBox, or set-up your own server.</p>
+
+<p>There are many different features to KeePass, such as an advanced password generator, various plugins that supply your credentials to services such as SSH or RDP, and an array of built-in settings to customize your experience.</p>
+
+
+![Figure Two](/img/Apps/keepass.PNG)
+
+<a href="http://keepass.info/download.html"><b>Download</b></a>
+<a href="http://keepass.info/plugins.html"><b>Plugins</b></a>
+<hr>
+
+<h2>Ubuntu on Windows</h2>
+
+<p>Ubuntu on Windows is Linux Subsystem that was released with the Windows 10 Anniversary update a year ago. Instead of needing to dual-boot or run a virtual machine, you can access the command-line by simply entering "bash" into the command prompt. While not all the full-fledged capabilities of Linux are available, you can still use many different Linux tools, access Windows files, and more. I've used this feature to SSH into remote servers, perform log analysis using grep and awk, and Metasploit for pen-testing my home network. This feature is still under development, as you need to enable developer mode on your machine. </p>
+
+<a href="https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/"><b>How to Guide</b></a>
+<hr>
+
+<h2>Browser Extensions</h2>
+<p>This section is geared towards Chrome, however many of these extensions are available for FireFox as well. </p>
+
+
+<a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en"><b>uBlock Origin</b></a>
+<p>As a long time AdBlock Plus user, I made the switch when news hit that ADP was sold to a mysterious buyer. While ADP is great to keep annoying ads and protecting your browsing session, uBlock does all of this as a light-weight extension. I'm not sure how much faster/lightweight uBlock is compared to ADP, the customizable settings and simple user-interface make it a winner in my book.</p>
+
+
+<a href="https://chrome.google.com/webstore/detail/https-everywhere/gcbommkclmclpchllfjekcdonpmejbdp?hl=en"><b>HTTPS Everywhere</b></a>
+<p>To protect your browsing experience, HTTPS everywhere will secure any traffic on websites that do not have a valid/existing certificate. Most websites these days have HTTPS enabled, small business websites for example may not. I've used HTTPS Everywhere for the past few years and have never had a hiccup.</p>
+
+<a href="https://chrome.google.com/webstore/detail/wappalyzer/gppongmhjkpfnbhagpmjfkannfbllamg?hl=en"><b>Wappalyzer</b></a>
+<p>During a pen-test engagement last year, a co-worker recommended that I install the Wapplyzer extension to discover the technologies that web applications use on the front-end and back-end. Besides pen-testing, I've used this extension on many websites as an informational tool to understand the technologies that are in use. </p>
+
+![Figure Three](/img/Apps/wapp.PNG)
+
+<a href="https://chrome.google.com/webstore/detail/ghostery/mlomiejdfkolichcflejclcbmpeaniij"><b>Ghostery</b></a>
+<p>Ghostery will help protect and privatize your browsing experience by blocking tracking requests on websites. When you load up a web application, Ghostery will block and list all of the trackers (advertising, social media, analytics, etc) that a website may have. I'd <b>highly</b> recommend that you opt out of any programs that allows Ghostery to collect your data, or else you'll be contributing to the ad industry.</p>
+<hr>
+
+<h2>WinDirStat</h2>
+<p>Have you ever looked at your storage drives and noticed that some drives are full, but you aren't aware which applications take up the most space? Whenever I was low on disk space, I'd tirelessly browse my files via File Explorer or the Control Panel's Add/Remove Programs looking to free up space. Once I discovered WinDirStat, this tedious process was simplified greatly. WinDirStat will analyze user selected disks and display a visual representation of the data on the disk. I've found it extremely helpful to remove large "hidden" files such as old virtual machine snapshots and video files on my SSD, then promptly removed or relocated them.</p>
+
+![Figure Four](/img/Apps/windirstat.PNG)
+
+<a href="https://windirstat.net/"><b>Download</b></a>
+<hr>
+
+<h2>Google Keep</h2>
+<p>For years I searched for the perfect note-taking and reminder application. I struggled using the Windows default sticky notes which was always a mess, sending email reminders or myself, and long, cluttered Word documents. When I discovered Google Keep, many of these issues were remediated. Google Keep can store notes on their Cloud that can be accessed from your desktop, to their web and mobile applications (there's even a handy widget on Android). Your reminders, lists, notes, pictures, drawings, etc can all be stored on Google Keep. You can color-code the "notes", place them in different folders, set reminders, etc! One use case for Google Keep is to set a to do list, which reminds you each day at a certain time. I constantly update this list, check off what's been done, and am always reminded at 8AM each morning.</p>
+
+![Figure Four](/img/Apps/windirstat.PNG)
+
+<a href="https://keep.google.com/"><b>Google Keep</b></a>
+<hr>
+
+<p>There are many other applications that I use on a daily basis, such as Intel XTU to monitor my hardware, CCleaner to clear junk, MalwareBytes to protect my computer, and much more. If you want to download multiple utilities for your computer at once, check out <a href="https://ninite.com/">Ninite</a>. You can simply check off the applications you wish to install on your computer and Ninite will package all of the respective set-up files in a simple installer. If you have any programs/utilities that you can't live without on your Windows PC, feel free to <a href="https://romcybersec.com/contact">contact<</a> and tell me more.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
