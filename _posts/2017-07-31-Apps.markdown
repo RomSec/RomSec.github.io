@@ -39,7 +39,7 @@ header-img: "img/Apps/headerr.png"
 
 <h2>Ubuntu on Windows</h2>
 
-<p>Ubuntu on Windows is Linux Subsystem that was released with the Windows 10 Anniversary update a year ago. Instead of needing to dual-boot or run a virtual machine, you can access the command-line by simply entering "bash" into the command prompt. While not all the full-fledged capabilities of Linux are available, you can still use many different Linux tools, access Windows files, and more. I've used this feature to SSH into remote servers, perform log analysis using grep and awk, and Metasploit for pen-testing my home network. This feature is still under development, as you need to enable developer mode on your machine. <i>If you're using an enterprise machine, enabling developer mode may be disabled/violate your group policy. </p>
+<p>Ubuntu on Windows is Linux Subsystem that was released with the Windows 10 Anniversary update a year ago. Instead of needing to dual-boot or run a virtual machine, you can access the command-line by simply entering "bash" into the command prompt. While not all the full-fledged capabilities of Linux are available, you can still use many different Linux tools, access Windows files, and more. I've used this feature to SSH into remote servers, perform log analysis using grep and awk, and Metasploit for pen-testing my home network. This feature is still under development, as you need to enable developer mode on your machine. <i>If you're using an enterprise machine, enabling developer mode may be disabled/violate your group policy.</i> </p>
 
 <a href="https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/"><b>How to Guide</b></a>
 <hr>
