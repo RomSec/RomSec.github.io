@@ -4,7 +4,7 @@ title:      "Must Have Windows Applications"
 subtitle:   "Various Desktop Applications to use"
 date:       2017-07-31 16:20:00
 author:     "Chris"
-header-img: "img/Apps/header2.png"
+header-img: "img/Apps/headerr.png"
 ---
 
 <p>A little more than a decade ago, my brother and I bought our first computer: an eMachines desktop that ran Windows XP. Since then, I've tooled around with Unix but have primarily used Windows for work and entertainment. Below you will find a curated list of exceptional applications that I used on my Windows machine.</p>
