@@ -7,12 +7,12 @@ author:     "Chris"
 header-img: "img/Apps/headerr.png"
 ---
 
-<p>A little more than a decade ago, my brother and I bought our first computer: an eMachines desktop that ran Windows XP. Since then, I've tooled around with Unix but have primarily used Windows for work and entertainment. Below you will find a curated list of exceptional applications that I used on my Windows machine.</p>
+<p>A little more than a decade ago, my brother and I bought our first computer: an eMachines desktop that ran Windows XP. Since then, I've tooled around with Unix but have primarily used Windows for work and entertainment. Below you will find a curated list of exceptional applications that I use on my Windows machines.</p>
 <hr>
 
 <h2>Sublime Text Editor</h2>
 
-<p>I was introduced to Sublime Text Editor a year ago. Since then, I sparingly use the default Notepad application unless Windows opens it automatically. Sublime has many wonderful features, such as auto-highlighting various languages, split editing one file (on different window panes), a built in Python console, and seemingly limitless customization. This customization includes thousands of packages, many of which are user created. These packages vary from different color themes that you can install, snippets that can auto-fill, advanced spell-checks, and more. Sublime does not have an advanced GUI, so it may seem foreign if you're used to using Word or NotePad++. Sublime is a licensed product, however you can download the free/unregistered version and use it as long as you'd like.</p>
+<p>I was introduced to Sublime Text Editor a year ago. Since then, I sparingly use the default Notepad application unless Windows opens it automatically. Sublime has many wonderful features, such as auto-highlighting various languages, split editing one file (separate columns/rows), a built in Python console, and seemingly limitless customization. This customization includes thousands of packages, many of which are user created. These packages vary from different color themes that you can install, snippets that can auto-fill, advanced spell-checks, and more. Sublime does not have an advanced GUI, so it may seem foreign if you're used to using Word or NotePad++. Sublime is a licensed product, however you can download the free/unregistered version and use it as long as you'd like.</p>
 
 ![Figure One](/img/Apps/sublime.PNG)
 
@@ -26,6 +26,8 @@ header-img: "img/Apps/headerr.png"
 
 <p>To combat this risk, I chose to use KeePass two years ago and haven't looked back. KeePass is a lightweight, open-source password manager that can be installed on all operating systems and mobile phones. Simply install the program on your device and create your password database. If you want access the database on multiple systems, place the file into a cloud service such as Google Drive or DropBox, or set-up your own server.</p>
 
+<p>From a security perspective, using a password manager is the way to go since each website's password will be complex and unique. If a website with your credentials is compromised, there's no need to change your passwords on other websites. All you need to remember is one long and complex password to the database.</p>
+
 <p>There are many different features to KeePass, such as an advanced password generator, various plugins that supply your credentials to services such as SSH or RDP, and an array of built-in settings to customize your experience.</p>
 
 
@@ -37,7 +39,7 @@ header-img: "img/Apps/headerr.png"
 
 <h2>Ubuntu on Windows</h2>
 
-<p>Ubuntu on Windows is Linux Subsystem that was released with the Windows 10 Anniversary update a year ago. Instead of needing to dual-boot or run a virtual machine, you can access the command-line by simply entering "bash" into the command prompt. While not all the full-fledged capabilities of Linux are available, you can still use many different Linux tools, access Windows files, and more. I've used this feature to SSH into remote servers, perform log analysis using grep and awk, and Metasploit for pen-testing my home network. This feature is still under development, as you need to enable developer mode on your machine. </p>
+<p>Ubuntu on Windows is Linux Subsystem that was released with the Windows 10 Anniversary update a year ago. Instead of needing to dual-boot or run a virtual machine, you can access the command-line by simply entering "bash" into the command prompt. While not all the full-fledged capabilities of Linux are available, you can still use many different Linux tools, access Windows files, and more. I've used this feature to SSH into remote servers, perform log analysis using grep and awk, and Metasploit for pen-testing my home network. This feature is still under development, as you need to enable developer mode on your machine. <i>If you're using an enterprise machine, enabling developer mode may be disabled/violate your group policy. </p>
 
 <a href="https://www.howtogeek.com/249966/how-to-install-and-use-the-linux-bash-shell-on-windows-10/"><b>How to Guide</b></a>
 <hr>
