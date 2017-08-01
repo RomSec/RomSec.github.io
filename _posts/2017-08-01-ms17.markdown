@@ -1,27 +1,26 @@
 ---
 layout:     post
-title:      "Is your network at Risk?"
+title:      "Is Your Network at Risk?"
 subtitle:   "Scanning your home network for MS17_010 with Metasploit"
 date:       2017-08-31 16:20:00
 author:     "Chris"
 header-img: "img/ms17/header.jpg"
 ---
 
-<p>In early March 2017, Microsoft posted a security bulletin for a critical vulnerability in their SMB protocol that allows attackers to execute remote code and take control of the machine. While they swiftly released a patch for supported operating systems, that didn't mean that every system was automatically patched. When the WannaCry Ransom-ware attack hit two months later, thousands of unpatched machines were locked down and users were forced to pay to regain access. Infected organizations that rely on computer systems for everyday tasks were brought to a screeching halt and had to find ways to remediate the problem. </p>
+<p>In early March 2017, Microsoft posted a security bulletin for a critical vulnerability in their SMB protocol that allows attackers to execute remote code and take control of the machine. While they swiftly released a patch for supported operating systems, that didn't mean that every system was automatically patched. When the WannaCry Ransomware attack hit two months later, thousands of unpatched machines were locked down and users were forced to pay to regain access. Infected organizations that rely on computer systems for everyday tasks were brought to a screeching halt and had to find ways to remediate the problem. </p>
 
 
-<p>When WannaCry hit, I immedaitely thought of all of the Windows devices connected to my home network. While my systems are always up to date, I wanted to ensure that the other Windows devices belonging to other users on my network were patched as well. While I didn't directly face any issues since my computer was secure, there's a possibility that other infected machine could compromise the local network. This post covers how you can avoid the disastrous ordeal that thousands of people faced by ensuring devices on your home network are patched. </p>
+<p>When WannaCry hit, I immedaitely thought of all of the Windows devices connected to my home network. While my systems are always up to date, I wanted to ensure that Windows devices belonging to other users on my network were patched as well. While I didn't directly face any issues since my computer was secure, there's a possibility that other infected machines could compromise the local network. This post covers how you can avoid the disastrous ordeal that thousands of people faced by ensuring devices on your home network are patched. </p>
 <hr>
 
 <h2>Getting Started</h2>
-<p>This guide will use the Metasploit framework to scan all of the hosts on your local network. The Metasploit framework can be set-up along with other dependencies on most Linux distros, however I recommend you set up a Kali Linux virtual machine which runs Metasploit out of the box. You could also download the Metasploit executable for Windows, however you'll need to disable your firewall and anti-virus software as well. To get started, make sure you have/download:</p>
+<p>This guide will use the Metasploit framework to scan all of the hosts on your local network. The Metasploit framework can be set-up along with other dependencies on most Linux distros, however I recommend you set up a Kali Linux virtual machine which runs Metasploit out of the box. You could also download the Metasploit executable for Windows, however you'll need to disable your firewall and anti-virus software as well.</p>
 
 <h3>Tools to Use</h3>
-<p></p>
+
 
 <li><a href="https://www.kali.org/downloads/"><b>Kali Linux - </b></a>Linux distro for penetration testing.</li>
 <li><a href="https://github.com/rapid7/metasploit-framework/blob/master/modules/auxiliary/scanner/smb/smb_ms17_010.rb"><b>MS17_010 Scanner Module - </b></a>The code that will be run against local machines with SMB enabled.</li>
-<li><b></b> </li>
 <hr>
 
 <h2>Adding the module to Metasploit</h2>
@@ -54,7 +53,7 @@ wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/module
 use auxiliary/scanner/smb/smb_ms17_010
 {% endhighlight %}
 
-<p><b>Troubleshooting</b><i>If Metasploit didn't recognize the external module, you'll need to type "reload_all" or restart Metasploit for it to pop up. Do not include the .rb file extension while running the use command.</i></p>
+<p><b>Troubleshooting</b><i> If Metasploit didn't recognize the external module, you'll need to type "reload_all" or restart Metasploit for it to pop up. Do not include the .rb file extension while running the use command.</i></p>
 
 <p>When you see "auxiliary(smb_ms17_010)" in the terminal, the module has been loaded properly. To view the options that the module requires, type "options" and you should see this:</p>
 
