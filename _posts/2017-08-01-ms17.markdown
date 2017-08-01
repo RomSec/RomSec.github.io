@@ -1,0 +1,119 @@
+---
+layout:     post
+title:      "Is your network at Risk?"
+subtitle:   "Scanning your home network for MS17_010 with Metasploit"
+date:       2017-08-31 16:20:00
+author:     "Chris"
+header-img: "img/ms17/header.jpg"
+---
+
+<p>In early March 2017, Microsoft posted a security bulletin for a critical vulnerability in their SMB protocol that allows attackers to execute remote code and take control of the machine. While they swiftly released a patch for supported operating systems, that didn't mean that every system was automatically patched. When the WannaCry Ransom-ware attack hit two months later, thousands of unpatched machines were locked down and users were forced to pay to regain access. Infected organizations that rely on computer systems for everyday tasks were brought to a screeching halt and had to find ways to remediate the problem. </p>
+
+
+<p>When WannaCry hit, I immedaitely thought of all of the Windows devices connected to my home network. While my systems are always up to date, I wanted to ensure that the other Windows devices belonging to other users on my network were patched as well. While I didn't directly face any issues since my computer was secure, there's a possibility that other infected machine could compromise the local network. This post covers how you can avoid the disastrous ordeal that thousands of people faced by ensuring devices on your home network are patched. </p>
+<hr>
+
+<h2>Getting Started</h2>
+<p>This guide will use the Metasploit framework to scan all of the hosts on your local network. The Metasploit framework can be set-up along with other dependencies on most Linux distros, however I recommend you set up a Kali Linux virtual machine which runs Metasploit out of the box. You could also download the Metasploit executable for Windows, however you'll need to disable your firewall and anti-virus software as well. To get started, make sure you have/download:</p>
+
+<h3>Tools to Use</h3>
+<p></p>
+
+<li><a href="https://www.kali.org/downloads/"><b>Kali Linux - </b></a>Linux distro for penetration testing.</li>
+<li><a href="https://github.com/rapid7/metasploit-framework/blob/master/modules/auxiliary/scanner/smb/smb_ms17_010.rb"><b>MS17_010 Scanner Module - </b></a>The code that will be run against local machines with SMB enabled.</li>
+<li><b></b> </li>
+<hr>
+
+<h2>Adding the module to Metasploit</h2>
+<p>First, navigate to the Metasploit external module directory.</p>
+
+{% highlight bash %}
+cd ~/.msf4/modules
+{% endhighlight %}
+
+<p>The next step is to create the appropriate directory for the module. To do this, we must properly follow the naming convention that Metasploit can follow. If you clicked on the module link above, you'll notice on directory tree that it's located under in the GitHub folder. We're going to use the same path. <i>Make sure to include the -p option after mkdir so all of the non-existent parent directories are created.</i></p>
+
+{% highlight bash %}
+mkdir -p /auxiliary/scanner/smb
+cd auxiliary/scanner/smb
+{% endhighlight %}
+
+<p>Now that we've made and are inside the correct directory, it's time to download the external module.</p>
+
+{% highlight bash %}
+wget https://raw.githubusercontent.com/rapid7/metasploit-framework/master/modules/auxiliary/scanner/smb/smb_ms17_010.rb
+{% endhighlight %}
+
+<p>The module is now inside the directory (type ls to view) and we can move onto the next step.</p>
+<hr>
+
+<h2>Running the Scanner</h2>
+<p>We can now boot up Metasploit by typing "msfconsole" into the terminal, then navigate to the external module that we downloaded.</p>
+
+{% highlight bash %}
+use auxiliary/scanner/smb/smb_ms17_010
+{% endhighlight %}
+
+<p><b>Troubleshooting</b><i>If Metasploit didn't recognize the external module, you'll need to type "reload_all" or restart Metasploit for it to pop up. Do not include the .rb file extension while running the use command.</i></p>
+
+<p>When you see "auxiliary(smb_ms17_010)" in the terminal, the module has been loaded properly. To view the options that the module requires, type "options" and you should see this:</p>
+
+![Figure One](/img/ms17/options.PNG)
+
+<p>The only required option to enter is RHOSTS. If you're scanning your home network, your IP space is most likely between 192.168.0.0 and 192.168.255.255. Instead of scanning each host individually, we can use CIDR notation to scan all of the hosts. <i> If you don't know your private IP address, check your router or type ipconfig (Windows) or ifconfig (Unix) into the terminal/command line.</i></p>
+
+{% highlight bash %}
+set RHOSTS 192.168.1.0/24
+{% endhighlight %}
+
+<p>All of our options are set, and we can now execute the module by typing "run" or "exploit" into the Metasploit framework. Depending on the size of your network, the scanner module may take a while. When it's done, you may see a similar result.</p>
+
+
+![Figure Two](/img/ms17/fini.PNG)
+
+<p>The hosts that were scanned are machines that have port 445 (SMB) open. You can confirm these devices by going to your router's web portal (192.168.1.1) and looking at your device list/DHCP client lease list. If you want more information on the client but don't have access to the router's web portal, use one of the following nmap commands. </p>
+
+{% highlight bash %}
+nmap -A enteriphere
+nmap -sV enteriphere
+nmap --version-all enteriphere
+nmap --osscan-guess enteriphere
+{% endhighlight %}
+
+<p><i>The commands above are not quiet and will generate a bit of network traffic!</i></p>
+<hr>
+
+<h1>Other Options</h1>
+<p>If you're unable to work with Metasploit, there is a script for nmap that will also search for machines vulnerable to MS17_010. Here are a few quick steps:</p>
+
+<li>Navigate to the Nmap script directory at "/usr/share/nmap/scripts".</li>
+<li>Download(wget) the Nmap script into the above directory <a href="https://raw.githubusercontent.com/cldrn/nmap-nse-scripts/master/scripts/smb-vuln-ms17-010.nse"><b>here</b></a>.</li>
+<li>Run the Nmap command by entering "nmap --script smb-vuln-ms17-010.nse".</li>
+
+{% highlight bash %}
+cd /usr/share/nmap/scripts
+wget https://raw.githubusercontent.com/cldrn/nmap-nse-scripts/master/scripts/smb-vuln-ms17-010.nse
+nmap --script smb-vuln-ms17-010.nse
+{% endhighlight %}
+
+<p>I've had trouble getting this script to execute properly most of the time, however it has worked for numerous individuals online. It's worth a shot.</p>
+<hr>
+
+<h2>Conclusion</h2>
+<p>If you identified any devices on your network that are vulnerable, patch them immediately. If not, check out other scripts for both Nmap and Metasploit that can scan for other end-point vulnerabilities on your local network. Thanks for viewing!</p>
+
+<h2>Resources</h2>
+<p>[1] <a href="https://technet.microsoft.com/en-us/library/security/ms17-010.aspx"><b>MS17-010 Bulletin</b></a></p>
+<p>[2] <a href="http://www.kalitutorials.net/2014/06/add-new-exploits-to-metasploit-from.html"><b>Adding External Modules to Metasploit</b></a></p>
+<p>[3] <a href="https://github.com/rapid7/metasploit-framework/wiki/Loading-External-Modules"><b>Rapid7 External Modules Documentation</b></a></p>
+<p>[4] <a href="https://www.darkoperator.com/installing-metasploit-in-ubunt/"><b>Installing Metasploit to Ubuntu</b></a></p>
+<p>[5] <a href="https://null-byte.wonderhowto.com/how-to/hack-like-pro-using-nmap-scripting-engine-nse-for-reconnaissance-0158681/"><b>Nmap Scripting</b></a></p>
+<p>[6] <a href="https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/"><b>Nmap Cheat Sheet</b></a></p>
+
+
+
+
+
+
+
+
