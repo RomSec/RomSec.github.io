@@ -4,7 +4,7 @@ title:      "Is Your Network at Risk?"
 subtitle:   "Scanning your home network for MS17_010 with Metasploit"
 date:       2017-08-31 16:20:00
 author:     "Chris"
-header-img: "img/ms17/header.jpg"
+header-img: "img/ms17/headerr.jpg"
 ---
 
 <p>In early March 2017, Microsoft posted a security bulletin for a critical vulnerability in their SMB protocol that allows attackers to execute remote code and take control of the machine. While they swiftly released a patch for supported operating systems, that didn't mean that every system was automatically patched. When the WannaCry Ransomware attack hit two months later, thousands of unpatched machines were locked down and users were forced to pay to regain access. Infected organizations that rely on computer systems for everyday tasks were brought to a screeching halt and had to find ways to remediate the problem. </p>
