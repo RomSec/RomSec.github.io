@@ -1,8 +1,8 @@
 ---
 layout:     post
 title:      "Is Your Network at Risk?"
-subtitle:   "Scanning your home network for MS17_010 with Metasploit"
-date:       2017-08-31 16:20:00
+subtitle:   "Scanning your home network for MS17_010 with Metasploit & Nmap"
+date:       2017-08-02 16:20:00
 author:     "Chris"
 header-img: "img/ms17/headerr.jpg"
 ---
