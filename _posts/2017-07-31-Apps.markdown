@@ -79,7 +79,7 @@ header-img: "img/Apps/headerr.png"
 <hr>
 
 <h2>What Else?</h2>
-<p>There are many other applications that I use on a daily basis, such as Intel XTU to monitor my hardware, CCleaner to clear junk, MalwareBytes to protect my computer, and much more. If you want to download multiple utilities for your computer at once, check out <a href="https://ninite.com/">Ninite</a>. You can simply check off the applications you wish to install on your computer and Ninite will package all of the respective set-up files in a simple installer. If you have any programs/utilities that you can't live without on your Windows PC, feel free to <a href="https://romcybersec.com/contact">contact<</a> and tell me more.</p>
+<p>There are many other applications that I use on a daily basis, such as Intel XTU to monitor my hardware, CCleaner to clear junk, MalwareBytes to protect my computer, and much more. If you want to download multiple utilities for your computer at once, check out <a href="https://ninite.com/">Ninite</a>. You can simply check off the applications you wish to install on your computer and Ninite will package all of the respective set-up files in a simple installer. If you have any programs/utilities that you can't live without on your Windows PC, feel free to <a href="https://romcybersec.com/contact">contact me</a>.</p>
 
 
 
